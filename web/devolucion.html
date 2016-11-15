@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css"/>        
+    <title>Devoluci&oacute;n</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <ul class="w3-navbar w3-blue-grey w3-card-2 w3-left-align w3-large">
+    <li class="w3-hide-medium w3-hide-large w3-opennav w3-right">
+      <a class="w3-padding-large w3-hover-white w3-large w3-blue-grey" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    </li>
+    <li><a href="index.html" class="w3-padding-large w3-white">Home</a></li>
+    <li class="w3-hide-small"><a href="prestamo.html" class="w3-padding-large w3-hover-white">Pr&eacute;stamo</a></li>
+    <li class="w3-hide-small"><a href="devolucion.html" class="w3-padding-large w3-hover-white">Devoluci&oacute;n</a></li>
+    <li class="w3-hide-small"><a href="ingresar.html" class="w3-padding-large w3-hover-white">Ingresar como administrador</a></li>
+    <li class="w3-hide-small"><a href="Controlador" class="w3-padding-large w3-hover-white">Cat&aacute;logo de productos</a></li>
+  </ul>
+
+</div>
+
+<div class="w3-row-padding w3-padding-64 w3-container">
+	<div class="w3-content">
+		<br><br><br>
+		<h1>Ingresa tu matr&iacute;cula</h1>
+		<br><br>
+		<form action="devolucion.jsp" method="post">
+		<h4 class="web-xlarge">Matr&iacute;cula: </h4>
+		<input name="matricula" type="text" class="w3-input"/> <br>
+		<br><br>
+		<input style="float:left" type=submit class="w3-btn w3-padding-16 w3-large w3-margin-top w3-quarter" value="Ingresar">
+		</form>
+	</div>
+</div>
+
+<script>
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else {
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
+
+</body>
+</html>

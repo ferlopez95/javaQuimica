@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <title>Pr&eacute;stamo de material y/o equipo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <ul class="w3-navbar w3-blue-grey w3-card-2 w3-left-align w3-large">
+    <li class="w3-hide-medium w3-hide-large w3-opennav w3-right">
+      <a class="w3-padding-large w3-hover-white w3-large w3-blue-grey" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    </li>
+    <li><a href="index.html" class="w3-padding-large w3-white">Home</a></li>
+    <li class="w3-hide-small"><a href="prestamo.html" class="w3-padding-large w3-hover-white">Pr&eacute;stamo</a></li>
+    <li class="w3-hide-small"><a href="devolucion.html" class="w3-padding-large w3-hover-white">Devoluci&oacute;n</a></li>
+    <li class="w3-hide-small"><a href="ingresar.html" class="w3-padding-large w3-hover-white">Ingresar como administrador</a></li>
+    <li class="w3-hide-small"><a href="Controlador" class="w3-padding-large w3-hover-white">Cat&aacute;logo de productos</a></li>
+  </ul>
+
+</div>
+
+<div class="w3-row-padding w3-padding-64 w3-container">
+	<div class="w3-content">
+		<br>
+		<h1 align="center">Pr&eacute;stamo de material y/o equipo</h1> <br>
+                <form action="solicitudPrestamo.jsp" method="post">
+		<table class="web-table" style="margin-left:-110px">
+			<tr>
+				<td></td><td></td><td></td><td></td><td><p style="float:right"><b>Fecha:</b></p></td><td><input style="margin-left:22px" type="date" name="fecha"/></td>
+			</tr>
+			<tr>
+				<th>
+					<p style="float:left">Nombres(s)</p>
+				</th>
+				<th>
+					<p style="float:left; margin-left:-20px">Apellidos</p>
+				</th>
+				<th>
+					<p style="float:left; margin-left:20px">Matr&iacute;cula</p>
+				</th>
+				<th>
+					<p style="float:left">Correo</p>
+				</th>
+				<th>
+					<p style="float:left; margin-left:15px">Laboratorio</p>
+				</th>
+				<th>
+					<p style="float:left; margin-left:15px">Profesor</p>
+				</th>
+			</tr>
+			<tr>
+				<td>
+					<input type="text" name="nombre" size="23"/>
+				</td>
+				<td>
+					<input style="margin-left:-20px" type="text" name="apellidos" size="20"/>
+				</td>
+				<td>
+					<input style="margin-left:20px" type="text" name="matricula" placeholder="A01234567" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="correo" size="15"/>
+				</td>
+				<td>
+					<input style="margin-left:15px" type="text" name="laboratorio" size="13"/>
+				</td>
+				<td>
+					<input style="margin-left:15px" type="text" name="profesor" size="18"/>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<p style="float:left">Descripci&oacute;n del Material</p>
+				</th>
+				<th>
+					<p style="float:left; margin-left:50px">Capacidad</p>
+				</th>
+				<th>
+					<p style="float:left">Marca</p>
+				</th>
+				<th>
+					<p style="float:left; margin-left:20px">Cantidad</p>
+				</th>
+				<th>
+					<p style="float:left">Status</p>
+				</th>
+				<th>
+					<p style="float:left">Observaciones</p>
+				</th>
+			</tr>
+			<tr>
+				<td>
+					<input type="text" name="descripcion1" size="30"/>
+				</td>
+				<td>
+					<input style="margin-left:50px" type="text" name="capacidad1" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="marca1" size="15"/>
+				</td>
+				<td>
+					<input style="margin-left:20px" type="text" name="cantidad1" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="status1" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="observaciones1" size="20"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="text" name="descripcion2" size="30"/>
+				</td>
+				<td>
+					<input style="margin-left:50px" type="text" name="capacidad2" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="marca2" size="15"/>
+				</td>
+				<td>
+					<input style="margin-left:20px" type="text" name="cantidad2" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="status2" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="observaciones2" size="20"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="text" name="descripcion3" size="30"/>
+				</td>
+				<td>
+					<input style="margin-left:50px" type="text" name="capacidad3" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="marca3" size="15"/>
+				</td>
+				<td>
+					<input style="margin-left:20px" type="text" name="cantidad3" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="status3" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="observaciones3" size="20"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="text" name="descripcion4" size="30"/>
+				</td>
+				<td>
+					<input style="margin-left:50px" type="text" name="capacidad4" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="marca4" size="15"/>
+				</td>
+				<td>
+					<input style="margin-left:20px" type="text" name="cantidad4" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="status4" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="observaciones4" size="20"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="text" name="descripcion5" size="30"/>
+				</td>
+				<td>
+					<input style="margin-left:50px" type="text" name="capacidad5" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="marca5" size="15"/>
+				</td>
+				<td>
+					<input style="margin-left:20px" type="text" name="cantidad5" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="status5" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="observaciones5" size="20"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="text" name="descripcion6" size="30"/>
+				</td>
+				<td>
+					<input style="margin-left:50px" type="text" name="capacidad6" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="marca6" size="15"/>
+				</td>
+				<td>
+					<input style="margin-left:20px" type="text" name="cantidad6" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="status6" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="observaciones6" size="20"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="text" name="descripcion7" size="30"/>
+				</td>
+				<td>
+					<input style="margin-left:50px" type="text" name="capacidad7" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="marca7" size="15"/>
+				</td>
+				<td>
+					<input style="margin-left:20px" type="text" name="cantidad7" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="status7" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="observaciones7" size="20"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="text" name="descripcion8" size="30"/>
+				</td>
+				<td>
+					<input style="margin-left:50px" type="text" name="capacidad8" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="marca8" size="15"/>
+				</td>
+				<td>
+					<input style="margin-left:20px" type="text" name="cantidad8" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="status8" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="observaciones8" size="20"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="text" name="descripcion9" size="30"/>
+				</td>
+				<td>
+					<input style="margin-left:50px" type="text" name="capacidad9" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="marca9" size="15"/>
+				</td>
+				<td>
+					<input style="margin-left:20px" type="text" name="cantidad9" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="status9" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="observaciones9" size="20"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="text" name="descripcion10" size="30"/>
+				</td>
+				<td>
+					<input style="margin-left:50px" type="text" name="capacidad10" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="marca10" size="15"/>
+				</td>
+				<td>
+					<input style="margin-left:20px" type="text" name="cantidad10" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="status10" size="10"/>
+				</td>
+				<td>
+					<input type="text" name="observaciones10" size="20"/>
+				</td>
+			</tr>
+		</table>
+                    <br>
+                    <input style="float:right" type=submit class="w3-btn w3-padding-16 w3-large w3-margin-top w3-quarter" value="Enviar">
+                </form>    
+	</div>
+</div>
+
+<script>
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else {
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
+
+</body>
+</html>
