@@ -11,7 +11,7 @@ package business;
  */
 public class Catalogo {
     
-    private String Nombre, Marca, Status, Cantidad, ID;
+    private String Nombre, Capacidad, Marca, Status, Cantidad, ID;
 
     public Catalogo() {
         this.Nombre = "";
@@ -19,14 +19,16 @@ public class Catalogo {
         this.Status = "";
         this.Cantidad = "";
         this.ID = "";
+        this.Capacidad = "";
     }
     
-    public Catalogo(String Nombre, String Marca, String Status, String Cantidad, String ID) {
+    public Catalogo(String Nombre,String Capacidad, String Marca, String Status, String Cantidad, String ID) {
         this.Nombre = Nombre;
         this.Marca = Marca;
         this.Status = Status;
         this.Cantidad = Cantidad;
         this.ID = ID;
+        this.Capacidad = Capacidad;
     }
     
     public String getNombre() {
@@ -37,6 +39,14 @@ public class Catalogo {
         this.Nombre = Nombre;
     }
 
+    public String getCapacidad() {
+        return Capacidad;
+    }
+
+    public void setCapacidad(String Capacidad) {
+        this.Capacidad = Capacidad;
+    }
+    
     public String getMarca() {
         return Marca;
     }
@@ -68,6 +78,5 @@ public class Catalogo {
     public void setID(String ID) {
         this.ID = ID;
     }
-    
     
 }
