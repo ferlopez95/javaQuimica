@@ -20,7 +20,7 @@
     </head>
     <body>
         <%@page import="business.Catalogo" %>
-        <% ArrayList catalogo = (ArrayList) request.getAttribute("lista");%>
+        <% ArrayList catalogo = (ArrayList) request.getAttribute("catalogo");%>
 
         <!-- Navbar -->
         <div class="w3-top">
