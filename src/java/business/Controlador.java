@@ -22,7 +22,7 @@ public class Controlador extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
         //Get parameters from the request.
-        String nombre = request.getParameter("Nombre");
+        /* String nombre = request.getParameter("Nombre");
         String marca = request.getParameter("Marca");
         String status = request.getParameter("Status");
         String cantidad = request.getParameter("Cantidad");
@@ -34,15 +34,34 @@ public class Controlador extends HttpServlet {
         status = "Disponible";
         cantidad = "15";
         id = "1425";
-        capacidad = "50ml";
+        capacidad = "50ml";*/
+        String op = request.getParameter("operacion");
+        String url = "";
+        System.out.println(op);
 
-        ArrayList lista = DBHandler.getCatalogo();
-        
-        //Catalogo catalogo = new Catalogo(nombre,capacidad, marca, status, cantidad, id);
+        if (op.equals("catalogoM")) {
+            String categoria = "materiales";
 
-        String url = "/catalogo.jsp";
+            ArrayList lista = DBHandler.getCatalogo(categoria);
 
-        request.setAttribute("catalogo", lista);
+            url = "/catalogo.jsp";
+
+            request.setAttribute("catalogo", lista);
+            
+        } else if (op.equals("catalogoE")){
+             String categoria = "elementos";
+
+            ArrayList lista = DBHandler.getCatalogo(categoria);
+
+            url = "/catalogo.jsp";
+            request.setAttribute("catalogo", lista);
+
+            
+        } 
+        else {
+            System.out.println("Error en la pagina");
+
+        }
 
         RequestDispatcher dispatcher
                 = getServletContext().getRequestDispatcher(url);

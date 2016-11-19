@@ -15,9 +15,26 @@ $(document).ready(function () {
         $('#materialesA').hide().removeClass('active');
     });
 
-    $('plus').click(function () {
+    $('.plus').click(function () {
         var trid = $(this).closest('tr').attr('id'); // table row ID 
+        var value = $(this).closest('.qty').val();
+
+        $(this).closest('.qty').val(value + 1);
         $('#' + trid).addClass('selected');
+    });
+    $('.plus').click(function () {
+        var trid = $(this).closest('tr').attr('id'); // table row ID 
+        var value = $(this).closest('.qty').val();
+        if (value != 0) {
+            $(this).closest('.qty').val(value - 1);
+
+        } else {
+            $(this).closest('.qty').val(0);
+
+            $('#' + trid).removeClass( "selected" );
+        }
+
+
     });
 
 

@@ -119,8 +119,9 @@
                     </div>
                     <div style="text-align: center">
                         <div class="btn-group" data-toggle="buttons">
-                            <button  type="button" class="active btn btn-primary btn-lg waves-effect waves-light"id="material">Material</button>
-                            <button  type="button" class="btn btn-primary btn-lg waves-effect waves-light" id="elementos">Elementos</button>
+                            <a href="Controlador?operacion=catalogoM"><button  type="button" class="active btn btn-primary btn-lg waves-effect waves-light"id="material">Material</button></a>
+                            <a href="Controlador?operacion=catalogoE"><button  type="button" class="btn btn-primary btn-lg waves-effect waves-light" id="elementos">Elementos</button></a>
+                            
                         </div>
                     </div>
                     <br>
@@ -169,6 +170,17 @@
                                     </td>
                                 </tr>
                                 <% }%>  
+                                 <tr>
+                                    <td colspan="1"></td>
+                                    <td>
+                                        <h4><strong>Total</strong></h4></td>
+                                    <td>
+                                        <h4><strong>5 productos</strong></h4></td>
+                                    <td colspan="3">
+                                        <button type="button" class="btn btn-primary waves-effect waves-light ordenar" >Separar <i
+                                                class="fa fa-angle-right right"></i></button>
+                                    </td>
+                                </tr>
                             </tbody>
                             <!--/Table body-->
                         </table>
@@ -207,12 +219,12 @@
                                         <%= c.getCantidad()%>
                                     </td>
                                     <td>
-                                        <span class="qty">1 </span>
+                                        <span class="qty" >0 </span>
                                         <div class="btn-group" data-toggle="buttons">
-                                            <label class="btn btn-sm btn-primary btn-rounded waves-effect waves-light">
+                                            <label class="btn btn-sm btn-primary btn-rounded waves-effect waves-light minus">
                                                 <input type="radio" name="options" id="option1">—
                                             </label>
-                                            <label class="btn btn-sm btn-primary btn-rounded waves-effect waves-light">
+                                            <label class="btn btn-sm btn-primary btn-rounded waves-effect waves-light plus">
                                                 <input type="radio" name="options" id="option2">+
                                             </label>
                                         </div>
@@ -226,7 +238,7 @@
                                     <td>
                                         <h4><strong>5 productos</strong></h4></td>
                                     <td colspan="3">
-                                        <button type="button" class="btn btn-primary waves-effect waves-light" id="ordenar">Separar <i
+                                        <button type="button" class="btn btn-primary waves-effect waves-light ordenar" >Separar <i
                                                 class="fa fa-angle-right right"></i></button>
                                     </td>
                                 </tr>

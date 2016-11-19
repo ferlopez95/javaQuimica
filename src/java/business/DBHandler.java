@@ -32,14 +32,16 @@ public class DBHandler {
         }
     }*/
     
-    public static ArrayList getCatalogo() {
+    public static ArrayList getCatalogo(String categoria) {
         ArrayList list = new ArrayList();
         try {            
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://localhost:3306/catalogoquimica";
             Connection connection = DriverManager.getConnection(url, "root", "");
             Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery("SELECT * FROM catalogo");
+            System.out.println("SELECT * FROM catalogo WHERE Categoria="+categoria);
+
+            ResultSet results = statement.executeQuery("SELECT * FROM catalogo WHERE Categoria= '"+categoria+"'");
 
             while (results.next()) {
                 String Id =Integer.toString(results.getInt("ID_Catalogo"));
