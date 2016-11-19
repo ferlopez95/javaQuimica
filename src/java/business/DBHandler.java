@@ -21,6 +21,8 @@ import java.util.logging.Logger;
  */
 public class DBHandler {
 
+    public static boolean usuarioValido = true;
+
     /*public DBHandler() {
         try {
             System.out.println("1");
@@ -31,6 +33,41 @@ public class DBHandler {
             e.printStackTrace();
         }
     }*/
+    
+    private static Connection connection;
+    
+    public DBHandler() {
+        try {
+          
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/catalogoquimica", "root", "");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    
+    public static Boolean getUser(User user) {
+        try {            
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("SELECT Usuario, Password FROM usuario");
+            
+            while (results.next()) {
+                String login=results.getString(1);
+                String password=results.getString(2);
+                if (user.getNombre().equals (login) && user.getPassword().equals(password)) {
+                    usuarioValido = true;
+                    return true;
+                }
+            }
+            statement.close();     
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        usuarioValido = false;
+        return false;
+    }
     
     public static ArrayList getCatalogo(String categoria) {
         ArrayList list = new ArrayList();
