@@ -2,7 +2,8 @@
  * Created by Edgardo on 14/11/16.
  */
 
-
+var arregloPedido = {};
+var pedidoTotal = 0;
 $(document).ready(function () {
     $('#material').click(function () {
         $('#materialesA').show();
@@ -15,42 +16,53 @@ $(document).ready(function () {
         $('#materialesA').hide().removeClass('active');
     });
 
-    $('.plus').click(function () {
+    $("body").on("click", ".plus", function () {
         var trid = $(this).closest('tr').attr('id'); // table row ID 
-        var value = $(this).closest('.qty').val();
-
-        $(this).closest('.qty').val(value + 1);
+        var value = parseInt($('.c' + trid).text());
+        $('.c' + trid).text(value + 1).trigger('change');
         $('#' + trid).addClass('selected');
     });
-    $('.plus').click(function () {
+
+    $("body").on("click", ".minus", function () {
         var trid = $(this).closest('tr').attr('id'); // table row ID 
-        var value = $(this).closest('.qty').val();
+        var value = parseInt($('.c' + trid).text());
         if (value != 0) {
-            $(this).closest('.qty').val(value - 1);
-
+            $('.c' + trid).text(value - 1).trigger('change');
         } else {
-            $(this).closest('.qty').val(0);
+            $('.c' + trid).text("0").trigger('change');
 
-            $('#' + trid).removeClass( "selected" );
+            $('#' + trid).removeClass("selected");
         }
-
-
     });
-
-
-
-
 
 
     $('.ordenar').click(function () {
         $(".selected").each(function (index) {
-            console.log(index + ": " + $(this).text());
+            var id = $(this).attr('id');
+            var cantidad = parseInt($('.c' + id).text())
+            arregloPedido[id] = cantidad;
         });
-
-        swal(
-                'Excelente!',
-                'Tus productos has sido enviados al administrados',
-                'success'
-                )
+        $('#datos').show('100');
+        console.log(arregloPedido);
     });
+
+    $('sendDatos').submit(function (event) {
+       
+        //event.preventDefault();
+
+        var datos = {};
+        var objName;
+        var objValue;
+        $(this).find(':input').each(function () {
+            objName = $(this).attr('name');
+            objValue = $(this).val();
+            datos[objName] = objValue;
+        });
+        
+        console.log(datos);
+        
+        return false;
+
+    });
+
 });

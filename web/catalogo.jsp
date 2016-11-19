@@ -121,7 +121,7 @@
                         <div class="btn-group" data-toggle="buttons">
                             <a href="Controlador?operacion=catalogoM"><button  type="button" class="active btn btn-primary btn-lg waves-effect waves-light"id="material">Material</button></a>
                             <a href="Controlador?operacion=catalogoE"><button  type="button" class="btn btn-primary btn-lg waves-effect waves-light" id="elementos">Elementos</button></a>
-                            
+
                         </div>
                     </div>
                     <br>
@@ -158,19 +158,19 @@
                                         <%= c.getCantidad()%>
                                     </td>
                                     <td>
-                                        <span class="qty">1 </span>
+                                        <span class="qty c<%= c.getID()%>" >0</span>
                                         <div class="btn-group" data-toggle="buttons">
-                                            <label class="btn btn-sm btn-primary btn-rounded waves-effect waves-light">
+                                            <label class="btn btn-sm btn-primary btn-rounded waves-effect waves-light minus">
                                                 <input type="radio" name="options" id="option1">—
                                             </label>
-                                            <label class="btn btn-sm btn-primary btn-rounded waves-effect waves-light">
+                                            <label class="btn btn-sm btn-primary btn-rounded waves-effect waves-light plus">
                                                 <input type="radio" name="options" id="option2">+
                                             </label>
                                         </div>
                                     </td>
                                 </tr>
                                 <% }%>  
-                                 <tr>
+                                <tr>
                                     <td colspan="1"></td>
                                     <td>
                                         <h4><strong>Total</strong></h4></td>
@@ -186,7 +186,6 @@
                         </table>
                     </div>
                     <div class="table-responsive" id="elementosM" style="display: none">
-                        <h5>Hola</h5>
                         <table class="table product-table">
                             <!--Table head-->
                             <thead>
@@ -249,6 +248,36 @@
                 </section>
                 <!--/Section: Blog v.4-->
                 <hr class="between-sections">
+                <div id="datos" style="display:none">
+                    <form id="sendDatos">
+                        <div class="col-md-6">
+                            <div class="md-form">
+                                <i class="fa fa-envelope prefix"></i>
+                                <input type="email" id="email" class="form-control validate" required>
+                                <label for="form9" data-error="No es correo" 
+                                       data-success="right" class="">Escribe tu correo</label>
+                            </div>
+
+                            <div class="md-form">
+                                <i class="fa fa-user prefix"></i>
+                                <input type="text" id="matricula" class="form-control" required>
+                                <label for="form9" class="">Escribe tu matricula</label>
+                            </div>
+
+                            <div class="md-form">
+                                <i class="fa fa-pencil prefix"></i>
+                                <input type="text" id="profesor" class="form-control" required>
+                                <label for="form9">Profesor</label>
+                            </div>
+                              <div class="text-xs-center">
+                                  <button class="btn btn-primary waves-effect waves-light" type="submit"> 
+                                            Enviar
+                                        </button>
+                               </div>
+                        </div>
+                    </form>
+                </div>
+
             </div>
         </main>
         <!--/Main layout-->
