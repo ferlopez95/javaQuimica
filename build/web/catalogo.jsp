@@ -249,33 +249,33 @@
                 <!--/Section: Blog v.4-->
                 <hr class="between-sections">
                 <div id="datos" style="display:none">
-                    <form id="sendDatos">
-                        <div class="col-md-6">
-                            <div class="md-form">
-                                <i class="fa fa-envelope prefix"></i>
-                                <input type="email" id="email" class="form-control validate" required>
-                                <label for="form9" data-error="No es correo" 
-                                       data-success="right" class="">Escribe tu correo</label>
-                            </div>
-
-                            <div class="md-form">
-                                <i class="fa fa-user prefix"></i>
-                                <input type="text" id="matricula" class="form-control" required>
-                                <label for="form9" class="">Escribe tu matricula</label>
-                            </div>
-
-                            <div class="md-form">
-                                <i class="fa fa-pencil prefix"></i>
-                                <input type="text" id="profesor" class="form-control" required>
-                                <label for="form9">Profesor</label>
-                            </div>
-                              <div class="text-xs-center">
-                                  <button class="btn btn-primary waves-effect waves-light" type="submit"> 
-                                            Enviar
-                                        </button>
-                               </div>
+                    <div class="col-md-6">
+                        <div class="md-form">
+                            <i class="fa fa-envelope prefix"></i>
+                            <input type="email" id="email" class="form-control validate" required>
+                            <label for="form9" data-error="No es correo" 
+                                   data-success="right" class="">Escribe tu correo</label>
                         </div>
-                    </form>
+
+                        <div class="md-form">
+                            <i class="fa fa-user prefix"></i>
+                            <input type="text" id="matricula" class="form-control" required>
+                            <label for="form9" class="">Escribe tu matricula</label>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-pencil prefix"></i>
+                            <input type="text" id="profesor" class="form-control" required>
+                            <label for="form9">Profesor</label>
+                        </div>
+                        <div class="text-xs-center">
+                            <button class="btn btn-primary waves-effect waves-light" id="btSend"
+                                   > 
+                                Enviar
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>

@@ -4,6 +4,17 @@
 
 var arregloPedido = {};
 var pedidoTotal = 0;
+function getPedido() {
+    $(".selected").each(function (index) {
+        var id = $(this).attr('id');
+        var cantidad = parseInt($('.c' + id).text());
+        arregloPedido[id] = cantidad;
+    });
+    $('#datos').show('100');
+    console.log(arregloPedido);
+}
+;
+
 $(document).ready(function () {
     $('#material').click(function () {
         $('#materialesA').show();
@@ -37,30 +48,43 @@ $(document).ready(function () {
 
 
     $('.ordenar').click(function () {
-        $(".selected").each(function (index) {
-            var id = $(this).attr('id');
-            var cantidad = parseInt($('.c' + id).text())
-            arregloPedido[id] = cantidad;
-        });
-        $('#datos').show('100');
-        console.log(arregloPedido);
+        getPedido();
     });
 
-    $('sendDatos').submit(function (event) {
-       
-        //event.preventDefault();
+    $('#btSend').click(function () {
+        getPedido();
 
-        var datos = {};
-        var objName;
-        var objValue;
-        $(this).find(':input').each(function () {
-            objName = $(this).attr('name');
-            objValue = $(this).val();
-            datos[objName] = objValue;
-        });
-        
-        console.log(datos);
-        
+        console.log(arregloPedido);
+        if (arregloPedido != undefined) {
+
+            var email = $('#email').val();
+            var matricula = $('#matricula').val();
+            var maestro = $('#profesor').val();
+         
+            if ( email && matricula && maestro ) {
+                arregloPedido['email'] = email;
+                arregloPedido['matricula'] = matricula;
+                arregloPedido['profesor'] = maestro;
+                console.log(arregloPedido);
+
+                $.ajax({
+                    url: 'Controlador?operacion=separar',
+                    data: arregloPedido,
+                    type: 'GET',
+                    error: function () {
+                        alert('error');
+                    }
+                });
+                arregloPedido = {};
+            } else {
+                alert("Datos incompletos");
+            }
+
+        } else {
+            alert("No has seleccionado ningun elemento");
+        }
+
+
         return false;
 
     });
