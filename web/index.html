@@ -5,13 +5,39 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <meta http-equiv="x-ua-compatible" content="ie=edge">
-      <title>Quimica</title>
+      <title>Almancen de Qu&iacute;mica</title>
       <!-- Font Awesome -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
       <!-- Bootstrap core CSS -->
       <link href="css/bootstrap.min.css" rel="stylesheet">
       <!-- Material Design Bootstrap -->
       <link href="css/mdb.min.css" rel="stylesheet">
+      
+      <script>
+          
+          function prestamo()
+          {
+              window.location.href = "prestamo.html";
+          }
+          
+          function catalogo()
+          {     
+              window.location.href = "catalogo.jsp";
+          }
+          
+          function estatus()
+          {     
+              window.location.href = "materialEquipo.html";
+          }
+          
+          function dano()
+          {
+              window.location.href = "index2.html";
+          }
+          
+          </script>
+      
+      
    </head>
    <body class="fixed-sn mdb-skin">
       <!--Double navigation-->
@@ -22,7 +48,9 @@
             <li>
                <div class="logo-wrapper waves-light sn-avatar-wrapper">
                   <a href="#">
-                  <img src="http://mdbootstrap.com/images/avatars/img%20(8)" class="img-circle">
+                  <img class="img-circle">
+                  
+                  <!---src="http://mdbootstrap.com/images/avatars/img%20(8)" --->
                   </a>
                </div>
             </li>
@@ -94,7 +122,7 @@
             </div>
             <!-- Breadcrumb-->
             <div class="breadcrumb-dn">
-               <p>Departamento de quimica</p>
+                <p>Departamento de qu&iacute;mica</p>
             </div>
            
          </nav>
@@ -111,23 +139,22 @@
                   <div class="col-md-12 wow fadeInUp">
                      <!--Featured image-->
                      <div class="view overlay hm-white-slight">
-                        <img src="assets/chemistry_logo.png" style="width: auto">
+                         
+                             <img src="assets/chemistry_logo.png" style="width: auto; margin: auto;">
                      </div>
                      <!--Post data-->
                      <div class="jumbotron wow fadeInUp" data-wow-delay="0.2s">
-                        <h2><a>Sistema de reservacino de quimica</a></h2>
+                         <h2><a>Sistema de Reservaci&oacute;n de Qu&iacute;mica</a></h2>
                         <p>
-                           Conoce el nuevo sistema que te permitira relizar tus solicitudes aun mas facil
+                            Conoce el nuevo sistema que te permitir&aacute; relizar tus solicitudes de una manera f&aacute;cil.
                         </p>
                      </div>
                      <!--/Post data-->
                      <!--Excerpt-->
                      <div class="excerpt">
-                        <p>Mediante este nuevo sistema tu podras realizaLorem solicitudes de prestamos al departamento
-                           de quimica
-                           .....ipsum dolor sit amet,
-                           consectetur adipisicing elit. Dignissimos ut tempore, cum minus
-                           perspiciatis,.
+                        <p>Mediante este nuevo sistema tu podras realizar solicitudes de prestamos al departamento
+                           de quimica.
+                        
                         </p>
                      </div>
                   </div>
@@ -146,18 +173,18 @@
                   <!--/.Controls-->
                   <!--Indicators-->
                   <ol class="carousel-indicators">
-                     <li class="primary-color" data-target="#multi-item-example" data-slide-to="0"></li>
-                     <li class="primary-color active" data-target="#multi-item-example" data-slide-to="1"></li>
+                     <li class="primary-color active" data-target="#multi-item-example" data-slide-to="0"></li>
+                     <li class="primary-color" data-target="#multi-item-example" data-slide-to="1"></li>
                      <li class="primary-color" data-target="#multi-item-example" data-slide-to="2"></li>
                   </ol>
                   <!--/.Indicators-->
                   <!--Slides-->
                   <div class="carousel-inner" role="listbox">
                      <!--First slide-->
-                     <div class="carousel-item">
+                     <div class="carousel-item active">
                         <div class="col-md-4">
                            <!--Card-->
-                           <div class="card card-cascade narrower">
+                           <div class="card card-cascade narrower" onclick="catalogo()">
                               <!--Card image-->
                               <div class="view overlay hm-white-slight">
                                  <img src="assets/catalogo.jpg"
@@ -168,9 +195,9 @@
                               </div>
                               <!--/.Card image-->
                               <!--Card content-->
-                              <div class="card-block text-xs-center">
+                              <div class="card-block text-xs-center" >
                                  <!--Category & Title-->
-                                 <h4 class="card-title"><strong><a href="">Catalogo</a></strong></h4>
+                                 <h4 class="card-title"><strong><a href="catalogo.jsp" onclick="catalogo()">Catalogo</a></strong></h4>
                                  <!--Description-->
                                  <p class="card-text">Catalogo de elementos disponibles</p>
                                  <!--Card footer-->
@@ -183,12 +210,12 @@
                         </div>
                         <div class="col-md-4 hidden-sm-down">
                            <!--Card-->
-                           <div class="card card-cascade narrower">
+                           <div class="card card-cascade narrower" onclick="prestamo()">
                               <!--Card image-->
-                              <div class="view overlay hm-white-slight">
-                                 <img src="assets/prestamos.jpg"
-                                    class="img-fluid" alt="">
-                                 <a>
+                              <div class="view overlay hm-white-slight"> 
+                                  <img src="assets/prestamos.jpg"
+                                    class="img-fluid" alt="" >
+                                  <a>
                                     <div class="mask waves-effect waves-light"></div>
                                  </a>
                               </div>
@@ -196,9 +223,9 @@
                               <!--Card content-->
                               <div class="card-block text-xs-center">
                                  <!--Category & Title-->
-                                 <h4 class="card-title"><strong><a href="">Prestamos</a></strong></h4>
+                                 <h4 class="card-title"><strong><a href="prestamo.html" onclick="prestamo()">Prestamos</a></strong></h4>
                                  <!--Description-->
-                                 <p class="card-text">Realiza el prestamo de material pra tus practicas de
+                                 <p class="card-text">Realiza el prestamo de material para tus practicas de
                                     laboratorios.
                                  </p>
                                  <!--Card footer-->
@@ -209,7 +236,7 @@
                            </div>
                            <!--/.Card-->
                         </div>
-                        <div class="col-md-4 hidden-sm-down">
+                        <div class="col-md-4 hidden-sm-down" onclick="estatus()">
                            <!--Card-->
                            <div class="card card-cascade narrower">
                               <!--Card image-->
@@ -224,7 +251,7 @@
                               <!--Card content-->
                               <div class="card-block text-xs-center">
                                  <!--Category & Title-->
-                                 <h4 class="card-title"><strong><a href="">Estatus de pedido</a></strong></h4>
+                                 <h4 class="card-title"><strong><a href="materialEquipo.html">Estatus de pedido</a></strong></h4>
                                  <!--Description-->
                                  <p class="card-text">Revisa en que proceso se encuentra tu solicitud.
                                  </p>
@@ -239,8 +266,9 @@
                      </div>
                      <!--/.First slide-->
                      <!--Second slide-->
-                     <div class="carousel-item active">
-                        <div class="col-md-4">
+                     <!--  <div class="carousel-item active">   -->
+                     <div class="carousel-item ">
+                        <div class="col-md-4" onclick="dano()">
                            <!--Card-->
                            <div class="card card-cascade narrower">
                               <!--Card image-->
@@ -255,14 +283,13 @@
                               <!--Card content-->
                               <div class="card-block text-xs-center">
                                  <!--Category & Title-->
-                                 <h4 class="card-title"><strong><a href="">Levantamiento de incidentes</a></strong>
+                                 <h4 class="card-title"><strong><a href="index2.html">Levantamiento de incidentes</a></strong>
                                  </h4>
                                  <!--Description-->
                                  <p class="card-text">Realiza el ticket por elementos perdidos o dañados.
                                  </p>
                                  <!--Card footer-->
                                  <div class="card-footer">
-                                    </span>
                                  </div>
                               </div>
                               <!--/.Card content-->
@@ -289,7 +316,9 @@
                <!--First column-->
                <div class="col-md-12 col-md-offset-1">
                   <h5 class="title">Departamento de quimica</h5>
-                  <p>Informacion de institución.</p>
+                  <p>Informaci&oacute;n de instituci&oacute;n.</p>
+                  <p> Aulas I, Cuarto piso. </p>
+                  <p> Oficinas 404 </p>
                </div>
                <!--/.First column-->
                <hr class="hidden-md-up">
