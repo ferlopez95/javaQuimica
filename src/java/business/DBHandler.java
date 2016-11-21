@@ -113,10 +113,13 @@ public class DBHandler {
             Connection connection = DriverManager.getConnection(url, "root", "");
 
             Statement statement = connection.createStatement();
-            System.out.println("INSERT INTO prestamo(Solicitante, Matricula, Fecha_Solicitud, Status, Cantidad,ID_Catalogo) VALUES ('" + nombre + "','" + Matricula + "','" + fechaActual+ "','' ,'Pedido', '" +Cantidad + "','" + idProducto + "' )");
-
-           String query = " INSERT INTO prestamo(Solicitante, Matricula, Fecha_Solicitud, Fecha_Entrega, Status, Cantidad,ID_Catalogo) VALUES ('" + nombre + "','" + Matricula + "','" + fechaActual + "','0000-00-00 00:00:00' ,'Pedido', '" + Cantidad + "','" + idProducto + "' )";
-           statement.executeUpdate(query);
+            System.out.println("INSERT INTO prestamo(Solicitante, Matricula, Fecha_Solicitud, Status, Cantidad,ID_Catalogo) VALUES ('" + nombre + "','" + Matricula + "','" + fechaActual + "','' ,'Pedido', '" + Cantidad + "','" + idProducto + "' )");
+            //Restar a la BD lo que se pidio
+            String query1 = "UPDATE catalogo SET Cantidad = Cantidad - " + Cantidad + "   WHERE ID_Catalogo = '" + idProducto + "'";
+            //Insertar en pedidos
+            String query = " INSERT INTO prestamo(Solicitante, Matricula, Fecha_Solicitud, Fecha_Entrega, Status, Cantidad,ID_Catalogo) VALUES ('" + nombre + "','" + Matricula + "','" + fechaActual + "','0000-00-00 00:00:00' ,'Pedido', '" + Cantidad + "','" + idProducto + "' )";
+            statement.executeUpdate(query1);
+            statement.executeUpdate(query);
 
             statement.close();
             connection.close();
@@ -128,4 +131,38 @@ public class DBHandler {
         }
         //return list;
     }
+
+    public static ArrayList getPedidos(String matricula) {
+        ArrayList list = new ArrayList();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            String url = "jdbc:mysql://localhost:3306/catalogoquimica";
+            Connection connection = DriverManager.getConnection(url, "root", "");
+            Statement statement = connection.createStatement();
+
+            ResultSet results = statement.executeQuery("SELECT * FROM prestamo WHERE Matricula= '" + matricula + "'");
+
+            while (results.next()) {
+                String Id = Integer.toString(results.getInt("ID_Prestamo"));
+                String solicitante = results.getString("Solicitante");
+                String Matricula = results.getString("Capacidad");
+                String Fecha_Solicitud = results.getTimestamp("Fecha_Solicitud").toString();
+                String Fecha_Entrega = results.getTimestamp("Fecha_Entrega").toString();
+                String Status = results.getString("Status");
+                String Cantidad = Integer.toString(results.getInt("Cantidad"));
+                String ID_Catalogo = Integer.toString(results.getInt("ID_Catalogo"));
+                Prestamo prestamo = new Prestamo(Id,solicitante,Matricula,Fecha_Solicitud,Fecha_Entrega,Status,
+                Cantidad,ID_Catalogo);
+                list.add(prestamo);
+            }
+            statement.close();
+            connection.close();
+        } catch (Exception ex) {
+            //Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+        //return list;
+        return list;
+    }
+
 }

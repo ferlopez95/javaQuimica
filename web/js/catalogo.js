@@ -71,12 +71,12 @@ $(document).ready(function () {
             var email = $('#email').val();
             var matricula = $('#matricula').val();
             var nombre = $('#nombre').val();
-            arregloDatos['pedido']= arregloPedido;
+            arregloDatos['pedido'] = arregloPedido;
             if (email && matricula && nombre) {
                 arregloDatos['email'] = email;
                 arregloDatos['matricula'] = matricula;
                 arregloDatos['nombre'] = nombre;
-                
+
                 var datos = JSON.stringify(arregloDatos);
 
                 $.ajax({
@@ -88,6 +88,19 @@ $(document).ready(function () {
                         alert("woow!");
                     }
                 });
+                swal({
+                    title: 'Excelente',
+                    text: 'Tu pedido a se ha registrado, visita el laboratorio para que se te entrgue el material',
+                    type: 'success',
+                    showCancelButton: false,
+                    allowOutsideClick: false
+
+                }).then(function () {
+                   window.location.href = "index.html";
+                })
+                $('#email').val('');
+                $('#matricula').val('');
+                $('#nombre').val('');
 
                 arregloPedido = {};
             } else {

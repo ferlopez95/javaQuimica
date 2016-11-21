@@ -65,37 +65,20 @@ $(document).ready(function () {
         var array = $.map(arregloPedido, function (value, index) {
             return [value];
         });
-        
-       
 
         if (arregloPedido != undefined) {
 
             var email = $('#email').val();
             var matricula = $('#matricula').val();
             var nombre = $('#nombre').val();
-            arregloDatos['pedido']= arregloPedido;
+            arregloDatos['pedido'] = arregloPedido;
             if (email && matricula && nombre) {
                 arregloDatos['email'] = email;
                 arregloDatos['matricula'] = matricula;
                 arregloDatos['nombre'] = nombre;
-                
-                var datos = JSON.stringify(arregloDatos);
-                
-                
-                console.log(datos);
-                //alert(datos);
 
-                /*$.ajax({
-                 url: 'Controlador?operacion=separar&datos='+arregloPedido,
-                 type: 'POST',
-                 success: function(){
-                 
-                 },
-                 error: function () {
-                 alert('error');
-                 }
-                 });*/
-            
+                var datos = JSON.stringify(arregloDatos);
+
                 $.ajax({
                     url: "Controlador",
                     type: "POST",
@@ -105,25 +88,20 @@ $(document).ready(function () {
                         alert("woow!");
                     }
                 });
+                swal({
+                    title: 'Excelente',
+                    text: 'Tu pedido a se ha registrado, visita el laboratorio para que se te entrgue el material',
+                    type: 'success',
+                    showCancelButton: false,
+                    allowOutsideClick: false
 
-                /*
-                 xhttp = new XMLHttpRequest();
-                 xhttp.onload = function () {
-                 if (xhttp.readyState == 4) {
-                 if (xhttp.status == 200) {
-                 //alert(xhttp.responseText);
-                 alert("lo logro");
-                 }
-                 else{
-                 alert("Error ajax2");
-                 }
-                 }
-                 else{
-                 alert("Error ajax1");
-                 }
-                 };
-                 xhttp.open("GET", "Controlador?operacion=separar&datos=" + arregloPedido, true);
-                 xhttp.send();*/
+                }).then(function () {
+                   window.location.href = "index.html";
+                })
+                $('#email').val('');
+                $('#matricula').val('');
+                $('#nombre').val('');
+
                 arregloPedido = {};
             } else {
                 alert("Datos incompletos");

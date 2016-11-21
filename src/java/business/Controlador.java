@@ -29,7 +29,7 @@ public class Controlador extends HttpServlet {
             throws ServletException, IOException {
         //Get parameters from the request.
         String op = request.getParameter("operacion");
-        //String datos = request.getParameter("datos").toString();
+
         String url = "";
         System.out.println(op);
 
@@ -50,22 +50,20 @@ public class Controlador extends HttpServlet {
             url = "/catalogo.jsp";
             request.setAttribute("catalogo", lista);
 
-        } else if (op.equals("separar")) {
-            String selectStr = request.getParameter("datos");
-            String[] arrayStrs = request.getParameterValues("datos[]");
-            String[] myJsonData = request.getParameterValues("json[]");
-            System.out.println("Entro1");
-            System.out.println(myJsonData);
-            /* System.out.println(arrayStrs);
+        } else if (op.equals("vermas")) {
+            String matricula = request.getParameter("id");
+            
+            ArrayList lista = DBHandler.getPedidos(matricula);
 
-            if (arrayStrs != null) {
-                for (int i = 0; i < arrayStrs.length; i++) {
-                    System.out.println(arrayStrs[i] + "<br>");
-                }
-            }
-             */
+            request.setAttribute("pedidos", lista);
+            url = "/infoPedido.jsp";
 
-            url = "/index.html";
+        } else if (op.equals("aceptar")) {
+            String id = request.getParameter("id");
+
+        } else if (op.equals("rechazar")) {
+            String id = request.getParameter("id");
+
         } else {
             System.out.println("Error en la pagina");
 
@@ -97,12 +95,11 @@ public class Controlador extends HttpServlet {
         //Obtener cada uno de los elemenos del arreglo de pedidos
         for (Iterator iterator = pedidos.keySet().iterator(); iterator.hasNext();) {
             String key = (String) iterator.next();
-            String pe =  pedidos.get(key).toString();
+            String pe = pedidos.get(key).toString();
             //System.out.println("key: " + key);
             //System.out.println("cant: " + pe);
             DBHandler.setPedido(nombre, matricula, pe, key);
 
-            //System.out.println(pe);
         }
         System.out.println("Fin de post");
 
