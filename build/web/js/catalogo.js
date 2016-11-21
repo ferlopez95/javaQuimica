@@ -3,12 +3,17 @@
  */
 
 var arregloPedido = {};
+var arregloDatos = {};
 var pedidoTotal = 0;
 function getPedido() {
+    var i = 0;
     $(".selected").each(function (index) {
         var id = $(this).attr('id');
         var cantidad = parseInt($('.c' + id).text());
         arregloPedido[id] = cantidad;
+
+
+        // arregloPedido[id] = cantidad;
     });
     $('#datos').show('100');
     console.log(arregloPedido);
@@ -55,26 +60,70 @@ $(document).ready(function () {
         getPedido();
 
         console.log(arregloPedido);
+
+
+        var array = $.map(arregloPedido, function (value, index) {
+            return [value];
+        });
+        
+       
+
         if (arregloPedido != undefined) {
 
             var email = $('#email').val();
             var matricula = $('#matricula').val();
-            var maestro = $('#profesor').val();
-         
-            if ( email && matricula && maestro ) {
-                arregloPedido['email'] = email;
-                arregloPedido['matricula'] = matricula;
-                arregloPedido['profesor'] = maestro;
-                console.log(arregloPedido);
+            var nombre = $('#nombre').val();
+            arregloDatos['pedido']= arregloPedido;
+            if (email && matricula && nombre) {
+                arregloDatos['email'] = email;
+                arregloDatos['matricula'] = matricula;
+                arregloDatos['nombre'] = nombre;
+                
+                var datos = JSON.stringify(arregloDatos);
+                
+                
+                console.log(datos);
+                //alert(datos);
 
+                /*$.ajax({
+                 url: 'Controlador?operacion=separar&datos='+arregloPedido,
+                 type: 'POST',
+                 success: function(){
+                 
+                 },
+                 error: function () {
+                 alert('error');
+                 }
+                 });*/
+            
                 $.ajax({
-                    url: 'Controlador?operacion=separar',
-                    data: arregloPedido,
-                    type: 'GET',
-                    error: function () {
-                        alert('error');
+                    url: "Controlador",
+                    type: "POST",
+                    dataType: 'json',
+                    data: {json: datos},
+                    success: function (data) {
+                        alert("woow!");
                     }
                 });
+
+                /*
+                 xhttp = new XMLHttpRequest();
+                 xhttp.onload = function () {
+                 if (xhttp.readyState == 4) {
+                 if (xhttp.status == 200) {
+                 //alert(xhttp.responseText);
+                 alert("lo logro");
+                 }
+                 else{
+                 alert("Error ajax2");
+                 }
+                 }
+                 else{
+                 alert("Error ajax1");
+                 }
+                 };
+                 xhttp.open("GET", "Controlador?operacion=separar&datos=" + arregloPedido, true);
+                 xhttp.send();*/
                 arregloPedido = {};
             } else {
                 alert("Datos incompletos");

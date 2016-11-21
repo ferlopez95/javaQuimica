@@ -265,8 +265,8 @@
 
                         <div class="md-form">
                             <i class="fa fa-pencil prefix"></i>
-                            <input type="text" id="profesor" class="form-control" required>
-                            <label for="form9">Profesor</label>
+                            <input type="text" id="nombre" class="form-control" required>
+                            <label for="form9">Nombre</label>
                         </div>
                         <div class="text-xs-center">
                             <button class="btn btn-primary waves-effect waves-light" id="btSend"

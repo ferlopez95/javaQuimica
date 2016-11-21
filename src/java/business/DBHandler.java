@@ -11,9 +11,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Date;
 
 /**
  *
@@ -33,12 +36,11 @@ public class DBHandler {
             e.printStackTrace();
         }
     }*/
-    
     private static Connection connection;
-    
+
     public DBHandler() {
         try {
-          
+
             connection = DriverManager.getConnection("jdbc:mysql://localhost/catalogoquimica", "root", "");
 
         } catch (Exception e) {
@@ -46,49 +48,46 @@ public class DBHandler {
         }
     }
 
-    
     public static Boolean getUser(User user) {
-        try {            
+        try {
             Statement statement = connection.createStatement();
             ResultSet results = statement.executeQuery("SELECT Usuario, Password FROM usuario");
-            
+
             while (results.next()) {
-                String login=results.getString(1);
-                String password=results.getString(2);
-                if (user.getNombre().equals (login) && user.getPassword().equals(password)) {
+                String login = results.getString(1);
+                String password = results.getString(2);
+                if (user.getNombre().equals(login) && user.getPassword().equals(password)) {
                     usuarioValido = true;
                     return true;
                 }
             }
-            statement.close();     
-        }
-        catch (SQLException ex) {
+            statement.close();
+        } catch (SQLException ex) {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
         usuarioValido = false;
         return false;
     }
-    
+
     public static ArrayList getCatalogo(String categoria) {
         ArrayList list = new ArrayList();
-        try {            
+        try {
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://localhost:3306/catalogoquimica";
             Connection connection = DriverManager.getConnection(url, "root", "");
             Statement statement = connection.createStatement();
-            System.out.println("SELECT * FROM catalogo WHERE Categoria="+categoria);
 
-            ResultSet results = statement.executeQuery("SELECT * FROM catalogo WHERE Categoria= '"+categoria+"'");
+            ResultSet results = statement.executeQuery("SELECT * FROM catalogo WHERE Categoria= '" + categoria + "'");
 
             while (results.next()) {
-                String Id =Integer.toString(results.getInt("ID_Catalogo"));
-                String descripcion =results.getString("Descripcion");
-                String capacidad =Integer.toString(results.getInt("Capacidad"));
-                String marca =results.getString("Marca");
-                String status =results.getString("Status");
-                String cantidad =Integer.toString(results.getInt("Cantidad"));
+                String Id = Integer.toString(results.getInt("ID_Catalogo"));
+                String descripcion = results.getString("Descripcion");
+                String capacidad = Integer.toString(results.getInt("Capacidad"));
+                String marca = results.getString("Marca");
+                String status = results.getString("Status");
+                String cantidad = Integer.toString(results.getInt("Cantidad"));
 
-                Catalogo catalogo = new Catalogo(descripcion,capacidad,marca,status,cantidad,Id);
+                Catalogo catalogo = new Catalogo(descripcion, capacidad, marca, status, cantidad, Id);
                 list.add(catalogo);
             }
             statement.close();
@@ -99,5 +98,34 @@ public class DBHandler {
         }
         //return list;
         return list;
+    }
+
+    public static void setPedido(String nombre, String Matricula, String Cantidad, String idProducto) {
+        try {
+
+            //Obtener fecha actual
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date date = new Date();
+            String fechaActual = (String) dateFormat.format(date);
+            /////////////////////
+            Class.forName("com.mysql.jdbc.Driver");
+            String url = "jdbc:mysql://localhost:3306/catalogoquimica";
+            Connection connection = DriverManager.getConnection(url, "root", "");
+
+            Statement statement = connection.createStatement();
+            System.out.println("INSERT INTO prestamo(Solicitante, Matricula, Fecha_Solicitud, Status, Cantidad,ID_Catalogo) VALUES ('" + nombre + "','" + Matricula + "','" + fechaActual+ "','' ,'Pedido', '" +Cantidad + "','" + idProducto + "' )");
+
+           String query = " INSERT INTO prestamo(Solicitante, Matricula, Fecha_Solicitud, Fecha_Entrega, Status, Cantidad,ID_Catalogo) VALUES ('" + nombre + "','" + Matricula + "','" + fechaActual + "','0000-00-00 00:00:00' ,'Pedido', '" + Cantidad + "','" + idProducto + "' )";
+           statement.executeUpdate(query);
+
+            statement.close();
+            connection.close();
+
+        } catch (Exception ex) {
+            System.out.println("Error");
+
+            ex.printStackTrace();
+        }
+        //return list;
     }
 }
