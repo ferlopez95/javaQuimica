@@ -122,8 +122,8 @@
                 <!--Section: Blog v.4-->
                 <section class="section section-blog-fw">
                     <div style="text-align: center">
-                        <%   Prestamo p1 = (Prestamo) pedidos.get(1);  %>
-                        <h5>Pedidos de <%= p1.getSolicitante() %> </h5>
+                        <%   Prestamo p1 = (Prestamo) pedidos.get(1);%>
+                        <h5>Pedidos de <%= p1.getSolicitante()%> </h5>
                     </div>
 
                     <br>
@@ -141,32 +141,40 @@
                             <!--/Table head-->
                             <!--Table body-->
                             <tbody>
-                                <% for (int i = 0; i < pedidos.size(); i++) {
+                                <%
+                                    int total = 0;
+                                    String orden = "",status = "";
+                                    for (int i = 0; i < pedidos.size(); i++) {
                                         Prestamo p = (Prestamo) pedidos.get(i);
+                                        total = total + Integer.parseInt(p.getCantidad());
+                                        orden = p.getNumOrden();
+                                        status = p.getStatus();
                                 %>
                                 <tr id="<%=p.getId_Prestamo()%>">
                                     <td>
-                                        <h5><strong>  <%= p.getNombreCatalogo() %> </strong></h5>
+                                        <h5><strong>  <%= p.getNombreCatalogo()%> </strong></h5>
 
+                                    </td>
+                                    <td>
+                                        <%= p.getCantidad()%>
                                     </td>
                                     <td>
                                         <%= p.getFecha_Solicitud()%>
                                     </td>
-                                    <td>
-                                        <%= p.getCantidad() %>
-                                    </td>
-                                    <% if (p.getFecha_Entrega() != "0000-00-00 00:00:00") {
+
+
+                                    <% if ((p.getFecha_Entrega() != "0000-00-00 00:00:00") && (p.getFecha_Entrega() != null)) {
                                     %>
                                     <td>
                                         <%= p.getFecha_Entrega()%>
                                     </td>
-                                   <% } else {%>
+                                    <% } else {%>
                                     <td>
                                         NoEntregado
                                     </td>
                                     <%}%>
-                                    
-                                   
+
+
                                 </tr>
                                 <% }%>  
                                 <tr>
@@ -174,11 +182,23 @@
                                     <td>
                                         <h4><strong>Total</strong></h4></td>
                                     <td>
-                                        <h4><strong>5 productos</strong></h4></td>
-                                    <td colspan="3">
-                                        <button type="button" class="btn btn-primary waves-effect waves-light ordenar" >Separar <i
-                                                class="fa fa-angle-right right"></i></button>
+                                        <h4><strong><%= total%> productos</strong></h4></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="1"></td>
+                                    <% if( status.equals("Pedido") ) {%>
+                                    <td>
+                                        <a href="Controlador?operacion=aceptar&oden=<%= orden%>" > <button class="btn btn-success  waves-effect waves-light"> Aceptar</button></a>
                                     </td>
+                                    <td>
+                                        <a href="Controlador?operacion=rechazar&oden=<%= orden%>" > <button class="btn btn-danger  waves-effect waves-light"> Rechazar</button></a>
+                                    </td>
+                                    <% } else { %>
+                                     <td>
+                                        <a href="Controlador?operacion=allPedidos"> <button class="btn btn-primary waves-effect waves-light"> Regresar</button></a>
+                                    </td>
+                                    <%} %>
+
                                 </tr>
                             </tbody>
                             <!--/Table body-->

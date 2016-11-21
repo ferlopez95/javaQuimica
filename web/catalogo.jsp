@@ -62,12 +62,12 @@
                 <!-- Side navigation links -->
                 <li>
                     <ul class="collapsible collapsible-accordion">
-                        <li><a class="collapsible-header waves-effect arrow-r" href="index.html"><i class="fa fa-bus"></i>Inicio</a>
+                        <li><a class="collapsible-header waves-effect arrow-r" href="index.html"><i class="fa fa-home"></i>Inicio</a>
                         </li>
-                        <li><a class="collapsible-header waves-effect arrow-r" href="prestamos.php"><i class="fa fa-camera"></i>Prestamos</a>
+                        <li><a class="collapsible-header waves-effect arrow-r" href="Controlador?operacion=allPedidos"><i class="fa fa-exchange"></i>Prestamos</a>
                         </li>
                         <li>
-                            <a class="collapsible-header waves-effect arrow-r"><i class="fa fa-user"></i> Administrador<i
+                            <a class="collapsible-header waves-effect arrow-r"><i  class="fa fa-user"></i> Administrador<i
                                     class="fa fa-angle-down rotate-icon"></i></a>
                             <div class="collapsible-body">
                                 <ul>
@@ -79,7 +79,7 @@
                             </div>
                         </li>
                         <li>
-                            <a class="collapsible-header waves-effect arrow-r"><i class="fa fa-envelope"></i>Contactanos<i
+                            <a class="collapsible-header waves-effect arrow-r"><i class="fa fa-users"></i>Contactanos<i
                                     class="fa fa-angle-down rotate-icon"></i></a>
                             <div class="collapsible-body">
                                 <ul>
@@ -119,8 +119,9 @@
                     </div>
                     <div style="text-align: center">
                         <div class="btn-group" data-toggle="buttons">
-                            <a href="Controlador?operacion=catalogoM"><button  type="button" class="active btn btn-primary btn-lg waves-effect waves-light"id="material">Material</button></a>
+                          <!--  <a href="Controlador?operacion=catalogoM"><button  type="button" class="active btn btn-primary btn-lg waves-effect waves-light"id="material">Material</button></a>
                             <a href="Controlador?operacion=catalogoE"><button  type="button" class="btn btn-primary btn-lg waves-effect waves-light" id="elementos">Elementos</button></a>
+                           -->
 
                         </div>
                     </div>
@@ -140,7 +141,8 @@
                             <!--/Table head-->
                             <!--Table body-->
                             <tbody>
-                                <% for (int i = 0; i < catalogo.size(); i++) {
+                                <% Boolean ceros = false;
+                                    for (int i = 0; i < catalogo.size(); i++) {
                                         Catalogo c = (Catalogo) catalogo.get(i);
                                 %>
                                 <tr id="<%= c.getID()%>">
@@ -151,12 +153,14 @@
                                     <td>
                                         <%= c.getMarca()%>
                                     </td>
-                                    <td>
+                                    <td >
                                         <%= c.getCapacidad()%>
                                     </td>
-                                    <td>
+                                    <td id="cant<%= c.getID()%>">
                                         <%= c.getCantidad()%>
                                     </td>
+                                    <% if (c.getCantidad() != "0"){ 
+                                    ceros = true; %>
                                     <td>
                                         <span class="qty c<%= c.getID()%>" >0</span>
                                         <div class="btn-group" data-toggle="buttons">
@@ -168,6 +172,7 @@
                                             </label>
                                         </div>
                                     </td>
+                                    <% }%>
                                 </tr>
                                 <% }%>  
                                 <tr>
@@ -175,11 +180,13 @@
                                     <td>
                                         <h4><strong>Total</strong></h4></td>
                                     <td>
-                                        <h4><strong>5 productos</strong></h4></td>
+                                        <h4><strong><span id="sumaT">0</span> productos</strong></h4></td>
+                                    <% if(ceros){ %>
                                     <td colspan="3">
                                         <button type="button" class="btn btn-primary waves-effect waves-light ordenar" >Separar <i
                                                 class="fa fa-angle-right right"></i></button>
                                     </td>
+                                    <% } %>
                                 </tr>
                             </tbody>
                             <!--/Table body-->
@@ -214,7 +221,7 @@
                                     <td>
                                         <%= c.getCapacidad()%>
                                     </td>
-                                    <td>
+                                    <td class="cantidad">
                                         <%= c.getCantidad()%>
                                     </td>
                                     <td>

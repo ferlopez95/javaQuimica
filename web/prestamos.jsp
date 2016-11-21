@@ -68,9 +68,9 @@
                 <!-- Side navigation links -->
                 <li>
                     <ul class="collapsible collapsible-accordion">
-                        <li><a class="collapsible-header waves-effect arrow-r" href="index.html"><i class="fa fa-bus"></i>Inicio</a>
+                        <li><a class="collapsible-header waves-effect arrow-r" href="index.html"><i class="fa fa-home"></i>Inicio</a>
                         </li>
-                        <li><a class="collapsible-header waves-effect arrow-r" href="prestamos.php"><i class="fa fa-camera"></i>Prestamos</a>
+                        <li><a class="collapsible-header waves-effect arrow-r" href="Controlador?operacion=catalogoM"><i class="fa fa-list-ol"></i>Cat&aacute;logo</a>
                         </li>
                         <li>
                             <a class="collapsible-header waves-effect arrow-r"><i class="fa fa-user"></i> Administrador<i
@@ -85,7 +85,7 @@
                             </div>
                         </li>
                         <li>
-                            <a class="collapsible-header waves-effect arrow-r"><i class="fa fa-envelope"></i>Contactanos<i
+                            <a class="collapsible-header waves-effect arrow-r"><i class="fa fa-users"></i>Contactanos<i
                                     class="fa fa-angle-down rotate-icon"></i></a>
                             <div class="collapsible-body">
                                 <ul>
@@ -129,7 +129,6 @@
                             for (int i = 0; i < prestamos.size(); i++) {
                                 Prestamo p = (Prestamo) prestamos.get(i);
                                 String status = p.getStatus().toString();
-                                
 
 
                         %>
@@ -137,16 +136,16 @@
                         <div class="col-md-4">
 
                             <!-- Nav tabs -->
-                            <% if (status.equals("Pedido") ) {%>
+                            <% if (status.equals("Pedido")) {%>
                             <ul class="nav nav-tabs tabs-3 orange" role="tablist">
                                 <li class="nav-item waves-effect waves-light">
-                                    <a aria-expanded="false" class="nav-link" href="Controlador?operacion=vermas&oden=<%= p.getNumOrden() %>" role="tab">Ver mas</a>
+                                    <a aria-expanded="false" class="nav-link" href="Controlador?operacion=vermas&oden=<%= p.getNumOrden()%>" role="tab">Ver mas</a>
                                 </li> 
                                 <li class="nav-item waves-effect waves-light">
-                                    <a aria-expanded="false" class="nav-link" href="Controlador?operacion=aceptar&oden=<%= p.getNumOrden() %>" role="tab">Aceptar</a>
+                                    <a aria-expanded="false" class="nav-link" href="Controlador?operacion=aceptar&oden=<%= p.getNumOrden()%>" role="tab">Aceptar</a>
                                 </li>
                                 <li class="nav-item waves-effect waves-light">
-                                    <a aria-expanded="false" class="nav-link" href="Controlador?operacion=rechazar&oden=<%= p.getNumOrden() %>" role="tab">Rechazar</a>
+                                    <a aria-expanded="false" class="nav-link" href="Controlador?operacion=rechazar&oden=<%= p.getNumOrden()%>" role="tab">Rechazar</a>
                                 </li>
 
                             </ul>
@@ -155,20 +154,20 @@
 
                             <ul class="nav nav-tabs tabs-3 green" role="tablist">
                                 <li class="nav-item waves-effect waves-light">
-                                    <a aria-expanded="false" class="nav-link"  href="Controlador?operacion=vermas&oden=<%= p.getNumOrden() %>" role="tab">Ver mas</a>
+                                    <a aria-expanded="false" class="nav-link"  href="Controlador?operacion=vermas&oden=<%= p.getNumOrden()%>" role="tab">Ver mas</a>
                                 </li> 
                             </ul>
-                            <% } else if ( status.equals("Rechazado") ) {%>
+                            <% } else if (status.equals("Rechazado")) {%>
                             <ul class="nav nav-tabs tabs-3 red" role="tablist">
                                 <li class="nav-item waves-effect waves-light">
-                                    <a aria-expanded="false" class="nav-link" href="Controlador?operacion=vermas&oden=<%= p.getNumOrden() %>" role="tab">Ver mas</a>
+                                    <a aria-expanded="false" class="nav-link" href="Controlador?operacion=vermas&oden=<%= p.getNumOrden()%>" role="tab">Ver mas</a>
                                 </li> 
                             </ul>
 
                             <% } else {%>
                             <ul class="nav nav-tabs tabs-3 blue" role="tablist">
                                 <li class="nav-item waves-effect waves-light">
-                                    <a aria-expanded="false" class="nav-link"  href="Controlador?operacion=vermas&oden=<%= p.getNumOrden() %>" role="tab">Ver mas</a>
+                                    <a aria-expanded="false" class="nav-link"  href="Controlador?operacion=vermas&oden=<%= p.getNumOrden()%>" role="tab">Ver mas</a>
                                 </li> 
                             </ul>
 

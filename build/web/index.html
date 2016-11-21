@@ -17,12 +17,12 @@
           
           function prestamo()
           {
-              window.location.href = "prestamo.html";
+              window.location.href = "Controlador?operacion=allPedidos";
           }
           
           function catalogo()
           {     
-              window.location.href = "catalogo.jsp";
+              window.location.href = "Controlador?operacion=catalogoM";
           }
           
           function estatus()
@@ -81,9 +81,9 @@
             <!-- Side navigation links -->
             <li>
                <ul class="collapsible collapsible-accordion">
-                  <li><a class="collapsible-header waves-effect arrow-r" href="Controlador?operacion=catalogoM"><i class="fa fa-bus"></i>Cat&aacute;logo</a>
+                  <li><a class="collapsible-header waves-effect arrow-r" href="Controlador?operacion=catalogoM"><i class="fa fa-list-ol"></i>Cat&aacute;logo</a>
                   </li>
-                  <li><a class="collapsible-header waves-effect arrow-r" href="Controlador?operacion=allPedidos"><i class="fa fa-camera"></i>Prestamos</a>
+                  <li><a class="collapsible-header waves-effect arrow-r" href="Controlador?operacion=allPedidos"><i class="fa fa-exchange"></i>Prestamos</a>
                   </li>
                   <li>
                      <a class="collapsible-header waves-effect arrow-r"><i class="fa fa-user"></i> Administrador<i
@@ -98,7 +98,7 @@
                      </div>
                   </li>
                   <li>
-                     <a class="collapsible-header waves-effect arrow-r"><i class="fa fa-envelope"></i>Contactanos<i
+                     <a class="collapsible-header waves-effect arrow-r"><i class="fa fa-users"></i>Contactanos<i
                         class="fa fa-angle-down rotate-icon"></i></a>
                      <div class="collapsible-body">
                         <ul>
@@ -197,7 +197,7 @@
                               <!--Card content-->
                               <div class="card-block text-xs-center" >
                                  <!--Category & Title-->
-                                 <h4 class="card-title"><strong><a href="catalogo.jsp" onclick="catalogo()">Catalogo</a></strong></h4>
+                                 <h4 class="card-title"><strong><a href="Controlador?operacion=catalogoM" onclick="catalogo()">Catalogo</a></strong></h4>
                                  <!--Description-->
                                  <p class="card-text">Catalogo de elementos disponibles</p>
                                  <!--Card footer-->

@@ -33,16 +33,36 @@ $(document).ready(function () {
     });
 
     $("body").on("click", ".plus", function () {
+
+
         var trid = $(this).closest('tr').attr('id'); // table row ID 
+        var maxCant = parseInt($('#cant' + trid).text());
         var value = parseInt($('.c' + trid).text());
-        $('.c' + trid).text(value + 1).trigger('change');
-        $('#' + trid).addClass('selected');
+        // alert("Max: "+ maxCant + " valor : "+ value);
+
+
+        if (value == maxCant) {
+            $('.c' + trid).text(maxCant).trigger('change');
+            $('#' + trid).addClass('selected');
+        } else {
+            var actual = parseInt($('#sumaT').text());
+            $('#sumaT').text(actual + 1);
+            $('.c' + trid).text(value + 1).trigger('change');
+            $('#' + trid).addClass('selected');
+        }
+
+
+
     });
 
     $("body").on("click", ".minus", function () {
         var trid = $(this).closest('tr').attr('id'); // table row ID 
         var value = parseInt($('.c' + trid).text());
+
+
         if (value != 0) {
+            var actual = parseInt($('#sumaT').text());
+            $('#sumaT').text(actual - 1);
             $('.c' + trid).text(value - 1).trigger('change');
         } else {
             $('.c' + trid).text("0").trigger('change');
@@ -96,7 +116,7 @@ $(document).ready(function () {
                     allowOutsideClick: false
 
                 }).then(function () {
-                   window.location.href = "index.html";
+                    window.location.href = "index.html";
                 })
                 $('#email').val('');
                 $('#matricula').val('');

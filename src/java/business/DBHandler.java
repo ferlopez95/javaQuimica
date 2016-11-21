@@ -86,6 +86,10 @@ public class DBHandler {
                 String marca = results.getString("Marca");
                 String status = results.getString("Status");
                 String cantidad = Integer.toString(results.getInt("Cantidad"));
+                
+                if( Integer.parseInt(cantidad) <= 0){
+                    cantidad = "0";
+                }
 
                 Catalogo catalogo = new Catalogo(descripcion, capacidad, marca, status, cantidad, Id);
                 list.add(catalogo);
