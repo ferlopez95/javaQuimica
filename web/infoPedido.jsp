@@ -122,20 +122,20 @@
                 <!--Section: Blog v.4-->
                 <section class="section section-blog-fw">
                     <div style="text-align: center">
-                        <h5>Catalogo de contenido</h5>
+                        <%   Prestamo p1 = (Prestamo) pedidos.get(1);  %>
+                        <h5>Pedidos de <%= p1.getSolicitante() %> </h5>
                     </div>
-                   
+
                     <br>
                     <div class="table-responsive" id="materialesA">
                         <table class="table product-table">
                             <!--Table head-->
                             <thead>
                                 <tr>
-                                    <th>Decripcion</th>
-                                    <th>Marca</th>
-                                    <th>Capacidad</th>
+                                    <th>Nombre Producto</th>
                                     <th>Cantidad</th>
-                                    <th>Agregar</th>
+                                    <th>Fecha de Solicitud</th>
+                                    <th>Fecha de Entrega</th>
                                 </tr>
                             </thead>
                             <!--/Table head-->
@@ -144,31 +144,29 @@
                                 <% for (int i = 0; i < pedidos.size(); i++) {
                                         Prestamo p = (Prestamo) pedidos.get(i);
                                 %>
-                                <tr id="<%= c.getID()%>">
+                                <tr id="<%=p.getId_Prestamo()%>">
                                     <td>
-                                        <h5><strong>  <%= c.getNombre()%></strong></h5>
-                                        <p class="text-muted"><%= c.getID()%></p>
+                                        <h5><strong>  <%= p.getNombreCatalogo() %> </strong></h5>
+
                                     </td>
                                     <td>
-                                        <%= c.getMarca()%>
+                                        <%= p.getFecha_Solicitud()%>
                                     </td>
                                     <td>
-                                        <%= c.getCapacidad()%>
+                                        <%= p.getCantidad() %>
                                     </td>
+                                    <% if (p.getFecha_Entrega() != "0000-00-00 00:00:00") {
+                                    %>
                                     <td>
-                                        <%= c.getCantidad()%>
+                                        <%= p.getFecha_Entrega()%>
                                     </td>
+                                   <% } else {%>
                                     <td>
-                                        <span class="qty c<%= c.getID()%>" >0</span>
-                                        <div class="btn-group" data-toggle="buttons">
-                                            <label class="btn btn-sm btn-primary btn-rounded waves-effect waves-light minus">
-                                                <input type="radio" name="options" id="option1">—
-                                            </label>
-                                            <label class="btn btn-sm btn-primary btn-rounded waves-effect waves-light plus">
-                                                <input type="radio" name="options" id="option2">+
-                                            </label>
-                                        </div>
+                                        NoEntregado
                                     </td>
+                                    <%}%>
+                                    
+                                   
                                 </tr>
                                 <% }%>  
                                 <tr>
@@ -189,7 +187,7 @@
                 </section>
                 <!--/Section: Blog v.4-->
                 <hr class="between-sections">
-               
+
 
             </div>
         </main>

@@ -10,10 +10,18 @@ package business;
  * @author Edgardo Acosta
  */
 public class Prestamo {
-    private String Id_Prestamo,Solicitante,Matricula,Fecha_Solicitud,Fecha_Entrega,Status,Cantidad,Id_Catalogo;
+    private String Id_Prestamo,Solicitante,Matricula,Fecha_Solicitud,Fecha_Entrega,Status,Cantidad,Id_Catalogo,NombreCatalogo,NumOrden;
+
+    public String getNumOrden() {
+        return NumOrden;
+    }
+
+    public void setNumOrden(String NumOrden) {
+        this.NumOrden = NumOrden;
+    }
     
     public Prestamo(String idPrestamo,String solicitante,String matricula,String fechaSol,String fechaEnt,String status,
-            String cant,String idCatalog){
+            String cant,String idCatalog,String nombrec, String orden){
         Id_Prestamo = idPrestamo;
         Solicitante = solicitante;
         Matricula = matricula;
@@ -22,6 +30,8 @@ public class Prestamo {
         Status = status;
         Cantidad = cant;
         Id_Catalogo = idCatalog;
+        NombreCatalogo = nombrec;
+        NumOrden = orden;
     }
 
     public String getId_Pretamo() {
@@ -86,6 +96,22 @@ public class Prestamo {
 
     public void setId_Catalogo(String Id_Catalogo) {
         this.Id_Catalogo = Id_Catalogo;
+    }
+
+    public String getId_Prestamo() {
+        return Id_Prestamo;
+    }
+
+    public void setId_Prestamo(String Id_Prestamo) {
+        this.Id_Prestamo = Id_Prestamo;
+    }
+
+    public String getNombreCatalogo() {
+        return NombreCatalogo;
+    }
+
+    public void setNombreCatalogo(String NombreCatalogo) {
+        this.NombreCatalogo = NombreCatalogo;
     }
     
 }

@@ -51,19 +51,27 @@ public class Controlador extends HttpServlet {
             request.setAttribute("catalogo", lista);
 
         } else if (op.equals("vermas")) {
-            String matricula = request.getParameter("id");
-            
-            ArrayList lista = DBHandler.getPedidos(matricula);
+            String orden = request.getParameter("oden");
+
+            ArrayList lista = DBHandler.getPedidos(orden);
 
             request.setAttribute("pedidos", lista);
             url = "/infoPedido.jsp";
 
         } else if (op.equals("aceptar")) {
-            String id = request.getParameter("id");
-
+            String orden = request.getParameter("oden");
+            DBHandler.updateStatusPedido(orden, "Aceptado");
+            url = "/Controlador?operacion=allPedidos";
         } else if (op.equals("rechazar")) {
-            String id = request.getParameter("id");
 
+            String orden = request.getParameter("oden");
+            DBHandler.updateStatusPedido(orden, "Rechazado");
+            url = "/Controlador?operacion=allPedidos";
+        } else if (op.equals("allPedidos")) {
+            ArrayList lista = DBHandler.getAllPedidos();
+
+            request.setAttribute("pedidos", lista);
+            url = "/prestamos.jsp";
         } else {
             System.out.println("Error en la pagina");
 
@@ -91,6 +99,7 @@ public class Controlador extends HttpServlet {
 
         //Obtener el Json de productos seleccionados
         JSONObject pedidos = obj.getJSONObject("pedido");
+        String numOrden = DBHandler.getNumOrden();
 
         //Obtener cada uno de los elemenos del arreglo de pedidos
         for (Iterator iterator = pedidos.keySet().iterator(); iterator.hasNext();) {
@@ -98,7 +107,7 @@ public class Controlador extends HttpServlet {
             String pe = pedidos.get(key).toString();
             //System.out.println("key: " + key);
             //System.out.println("cant: " + pe);
-            DBHandler.setPedido(nombre, matricula, pe, key);
+            DBHandler.setPedido(nombre, matricula, pe, key, numOrden);
 
         }
         System.out.println("Fin de post");

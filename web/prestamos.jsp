@@ -3,6 +3,7 @@
     Created on : Nov 21, 2016, 3:24:31 AM
     Author     : Edgardo Acosta
 --%>
+<%@page import="business.Prestamo"%>
 <!DOCTYPE html>
 <%@page import="java.util.ArrayList"%>
 <%@page import="business.DBHandler"%>
@@ -27,7 +28,7 @@
     </head>
     <body class="fixed-sn mdb-skin">
         <%@page import="business.Catalogo" %>
-        <% ArrayList catalogo = (ArrayList) request.getAttribute("catalogo");%>
+        <% ArrayList prestamos = (ArrayList) request.getAttribute("pedidos");%>
         <!--Double navigation-->
         <header>
             <!-- Sidebar navigation -->
@@ -123,175 +124,78 @@
                         <h5>Lista de prestamos</h5>
                     </div>
                     <br>
-
                     <div class="row">
+                        <% int cont = 0;
+                            for (int i = 0; i < prestamos.size(); i++) {
+                                Prestamo p = (Prestamo) prestamos.get(i);
+                                String status = p.getStatus().toString();
+                                
+
+
+                        %>
 
                         <div class="col-md-4">
 
                             <!-- Nav tabs -->
-                            <ul class="nav nav-tabs tabs-3 green" role="tablist">
+                            <% if (status.equals("Pedido") ) {%>
+                            <ul class="nav nav-tabs tabs-3 orange" role="tablist">
                                 <li class="nav-item waves-effect waves-light">
-                                    <a aria-expanded="false" class="nav-link" data-toggle="tab" href="Controlador?operacion=vermas&id=1" role="tab">Ver mas</a>
+                                    <a aria-expanded="false" class="nav-link" href="Controlador?operacion=vermas&oden=<%= p.getNumOrden() %>" role="tab">Ver mas</a>
                                 </li> 
                                 <li class="nav-item waves-effect waves-light">
-                                    <a aria-expanded="false" class="nav-link" data-toggle="tab" href="Controlador?operacion=aceptar&id=1" role="tab">Aceptar</a>
+                                    <a aria-expanded="false" class="nav-link" href="Controlador?operacion=aceptar&oden=<%= p.getNumOrden() %>" role="tab">Aceptar</a>
                                 </li>
-                                 <li class="nav-item waves-effect waves-light">
-                                    <a aria-expanded="false" class="nav-link" data-toggle="tab" href="Controlador?operacion=rechazar&id=1" role="tab">Rechazar</a>
+                                <li class="nav-item waves-effect waves-light">
+                                    <a aria-expanded="false" class="nav-link" href="Controlador?operacion=rechazar&oden=<%= p.getNumOrden() %>" role="tab">Rechazar</a>
                                 </li>
-                               
+
                             </ul>
+                            <% } else if (status.equals("Aceptado")) {
+                            %>
 
-                            <!-- Tab panels -->
-                            <div class="tab-content card">
-
-                                <!--Panel 1-->
-                                <div aria-expanded="false" class="tab-pane fade" id="panel1" role="tabpanel">
-                                    <br>
-
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate
-                                        odit minima.</p>
-
-                                </div>
-                                <!--/.Panel 1-->
-
-                                <!--Panel 2-->
-                                <div aria-expanded="false" class="tab-pane fade" id="panel2" role="tabpanel">
-                                    <br>
-
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate
-                                        odit minima.</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate
-                                        odit minima.</p>
-
-                                </div>
-                                <!--/.Panel 2-->
-
-                                <!--Panel 3-->
-                                <div aria-expanded="true" class="tab-pane fade active in" id="panel3" role="tabpanel">
-                                    <br>
-
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate
-                                        odit minima.</p>
-
-                                </div>
-                                <!--/.Panel 3-->
-
-                            </div>
-
-
-                        </div>
-
-                        <div class="col-md-4">
-
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs tabs-3 indigo" role="tablist">
+                            <ul class="nav nav-tabs tabs-3 green" role="tablist">
                                 <li class="nav-item waves-effect waves-light">
-                                    <a class="nav-link active" data-toggle="tab" href="#panel5" role="tab"><i class="fa fa-user"></i> Profile</a>
-                                </li>
-                                <li class="nav-item waves-effect waves-light">
-                                    <a class="nav-link" data-toggle="tab" href="#panel6" role="tab"><i class="fa fa-heart"></i> Follow</a>
-                                </li>
-                                <li class="nav-item waves-effect waves-light">
-                                    <a class="nav-link" data-toggle="tab" href="#panel8" role="tab"><i class="fa fa-envelope"></i> Mail</a>
-                                </li>
+                                    <a aria-expanded="false" class="nav-link"  href="Controlador?operacion=vermas&oden=<%= p.getNumOrden() %>" role="tab">Ver mas</a>
+                                </li> 
                             </ul>
-
-                            <!-- Tab panels -->
-                            <div class="tab-content">
-
-                                <!--Panel 1-->
-                                <div class="tab-pane fade in active" id="panel5" role="tabpanel">
-                                    <br>
-
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate
-                                        odit minima.</p>
-
-                                </div>
-                                <!--/.Panel 1-->
-
-                                <!--Panel 2-->
-                                <div class="tab-pane fade" id="panel6" role="tabpanel">
-                                    <br>
-
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate
-                                        odit minima.</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate
-                                        odit minima.</p>
-
-                                </div>
-                                <!--/.Panel 2-->
-
-                                <!--Panel 3-->
-                                <div class="tab-pane fade" id="panel7" role="tabpanel">
-                                    <br>
-
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate
-                                        odit minima.</p>
-
-                                </div>
-                                <!--/.Panel 3-->
-
-                            </div>
-
-
-                        </div>
-                        
-                        <div class="col-md-4">
-
-                            <!-- Nav tabs -->
+                            <% } else if ( status.equals("Rechazado") ) {%>
                             <ul class="nav nav-tabs tabs-3 red" role="tablist">
                                 <li class="nav-item waves-effect waves-light">
-                                    <a aria-expanded="false" class="nav-link" data-toggle="tab" href="#panel1" role="tab">Profile</a>
-                                </li>
-                                <li class="nav-item waves-effect waves-light">
-                                    <a aria-expanded="false" class="nav-link" data-toggle="tab" href="#panel2" role="tab">Follow</a>
-                                </li>
-                                <li class="nav-item waves-effect waves-light">
-                                    <a aria-expanded="true" class="nav-link active" data-toggle="tab" href="#panel3" role="tab">Contact</a>
-                                </li>
+                                    <a aria-expanded="false" class="nav-link" href="Controlador?operacion=vermas&oden=<%= p.getNumOrden() %>" role="tab">Ver mas</a>
+                                </li> 
                             </ul>
+
+                            <% } else {%>
+                            <ul class="nav nav-tabs tabs-3 blue" role="tablist">
+                                <li class="nav-item waves-effect waves-light">
+                                    <a aria-expanded="false" class="nav-link"  href="Controlador?operacion=vermas&oden=<%= p.getNumOrden() %>" role="tab">Ver mas</a>
+                                </li> 
+                            </ul>
+
+                            <% }%>
 
                             <!-- Tab panels -->
                             <div class="tab-content card">
 
-                                <!--Panel 1-->
-                                <div aria-expanded="false" class="tab-pane fade" id="panel1" role="tabpanel">
+                                <!--Panel info-->
+                                <div class="tab-pane fade in active" >
                                     <br>
 
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate
-                                        odit minima.</p>
+                                    <p>El usuario a solicitado # productos el dia <%= p.getFecha_Solicitud()%>.</p>
 
                                 </div>
-                                <!--/.Panel 1-->
-
-                                <!--Panel 2-->
-                                <div aria-expanded="false" class="tab-pane fade" id="panel2" role="tabpanel">
-                                    <br>
-
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate
-                                        odit minima.</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate
-                                        odit minima.</p>
-
-                                </div>
-                                <!--/.Panel 2-->
-
-                                <!--Panel 3-->
-                                <div aria-expanded="true" class="tab-pane fade active in" id="panel3" role="tabpanel">
-                                    <br>
-
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate
-                                        odit minima.</p>
-
-                                </div>
-                                <!--/.Panel 3-->
+                                <!--/.Panel info-->
 
                             </div>
 
 
                         </div>
 
+
+
+
+
+                        <% }%>  
                     </div>
 
                 </section>
