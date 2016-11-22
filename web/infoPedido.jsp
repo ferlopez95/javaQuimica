@@ -168,7 +168,7 @@
                                     <td>
                                         <%= p.getFecha_Entrega()%>
                                     </td>
-                                    <% }  else if (status.equals("Rechazado")) {%>
+                                    <% } else if (status.equals("Rechazado")) {%>
                                     <td>
                                         N/A
                                     </td>
@@ -176,7 +176,7 @@
                                     <td>
                                         No Entregado
                                     </td>
-                                     <%}%>
+                                    <%}%>
 
 
                                 </tr>
@@ -197,7 +197,7 @@
                                         <a href="Controlador?operacion=rechazar&oden=<%= orden%>" > <button class="btn btn-danger  waves-effect waves-light"> Rechazar</button></a>
                                     </td>
                                     <td>
-                                       
+                                        <a href=" Controlador?operacion=retornar&oden=<%= orden%>" > <button class="btn btn-default  waves-effect waves-light"> Entregado</button></a>
                                     </td>
                                     <td>
                                         <a   onclick="goBack()"> <button class="btn btn-primary waves-effect waves-light"> Regresar</button></a>
@@ -205,7 +205,7 @@
                                     </td>
                                     <% } else { %>
                                     <td>
-                                        <a href=" Controlador?operacion=retornar&oden=<%= orden%>" > <button class="btn btn-default  waves-effect waves-light"> Entregado</button></a>
+                                        <a   onclick="goBack()"> <button class="btn btn-primary waves-effect waves-light"> Regresar</button></a>
 
                                     </td>
                                     <%}%>

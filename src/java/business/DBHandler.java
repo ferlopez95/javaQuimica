@@ -25,6 +25,7 @@ import java.util.Date;
 public class DBHandler {
 
     public static boolean usuarioValido = true;
+    public static boolean accesoParaAdmin = false;
 
     /*public DBHandler() {
         try {
@@ -58,6 +59,7 @@ public class DBHandler {
                 String password = results.getString(2);
                 if (user.getNombre().equals(login) && user.getPassword().equals(password)) {
                     usuarioValido = true;
+                    accesoParaAdmin = true;
                     return true;
                 }
             }
@@ -66,6 +68,7 @@ public class DBHandler {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
         usuarioValido = false;
+        accesoParaAdmin = false;
         return false;
     }
 

@@ -50,6 +50,21 @@ public class Controlador extends HttpServlet {
             url = "/catalogo.jsp";
             request.setAttribute("catalogo", lista);
 
+        } else if (op.equals("catalogoEAdmin")) {
+            String categoria = "elementos";
+
+            ArrayList lista = DBHandler.getCatalogo(categoria);
+
+            url = "/catalogoAdmin.jsp";
+            request.setAttribute("catalogo", lista);
+        } else if (op.equals("catalogoMAdmin")) {
+            String categoria = "materiales";
+
+            ArrayList lista = DBHandler.getCatalogo(categoria);
+
+            url = "/catalogoAdmin.jsp";
+
+            request.setAttribute("catalogo", lista);
         } else if (op.equals("vermas")) {
             String orden = request.getParameter("oden");
 
@@ -72,14 +87,14 @@ public class Controlador extends HttpServlet {
 
             request.setAttribute("pedidos", lista);
             url = "/prestamos.jsp";
+
         } else if (op.equals("retornar")) {
             String orden = request.getParameter("oden");
             DBHandler.retornarPedido(orden);
             DBHandler.entregarPedido(orden);
 
             url = "/Controlador?operacion=allPedidos";
-        } 
-        else if (op.equals("misPedidos")) {
+        } else if (op.equals("misPedidos")) {
             String matricula = request.getParameter("matricula");
 
             ArrayList lista = DBHandler.misPedidos(matricula);
@@ -87,9 +102,9 @@ public class Controlador extends HttpServlet {
             request.setAttribute("pedidos", lista);
             url = "/vermisPedidos.jsp";
 
-        }
-        
-         else {
+        } 
+        else 
+        {
             System.out.println("Error en la pagina");
 
         }
