@@ -36,8 +36,7 @@
                 <!-- Logo -->
                 <li>
                     <div class="logo-wrapper waves-light sn-avatar-wrapper">
-                        <a href="#">
-                            <img src="http://mdbootstrap.com/images/avatars/img%20(8)" class="img-circle">
+                         <a href="index.html">
                         </a>
                     </div>
                 </li>

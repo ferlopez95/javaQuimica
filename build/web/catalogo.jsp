@@ -31,7 +31,6 @@
                 <li>
                     <div class="logo-wrapper waves-light sn-avatar-wrapper">
                         <a href="index.html">
-                            <img src="http://prepamet.tol.itesm.mx/Logotipo_Vertical_Azul.png" class="img-circle">
                         </a>
                     </div>
                 </li>
