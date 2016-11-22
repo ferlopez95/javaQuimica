@@ -86,8 +86,8 @@ public class DBHandler {
                 String marca = results.getString("Marca");
                 String status = results.getString("Status");
                 String cantidad = Integer.toString(results.getInt("Cantidad"));
-                
-                if( Integer.parseInt(cantidad) <= 0){
+
+                if (Integer.parseInt(cantidad) <= 0) {
                     cantidad = "0";
                 }
 
@@ -103,7 +103,8 @@ public class DBHandler {
         //return list;
         return list;
     }
-     public static String getNumOrden() {
+
+    public static String getNumOrden() {
         String numOrden = "";
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -111,13 +112,13 @@ public class DBHandler {
             Connection connection = DriverManager.getConnection(url, "root", "");
             Statement statement = connection.createStatement();
 
-             ResultSet results = statement.executeQuery("SELECT MAX(NumOrden)+1 as numOrden FROM prestamo");
-            
+            ResultSet results = statement.executeQuery("SELECT MAX(NumOrden)+1 as numOrden FROM prestamo");
+
             while (results.next()) {
                 numOrden = results.getString("numOrden");
                 System.out.println(numOrden);
             }
-            if(numOrden == null){
+            if (numOrden == null) {
                 numOrden = "1";
             }
             statement.close();
@@ -129,7 +130,7 @@ public class DBHandler {
         return numOrden;
     }
 
-    public static void setPedido(String nombre, String Matricula, String Cantidad, String idProducto,String numOrden) {
+    public static void setPedido(String nombre, String Matricula, String Cantidad, String idProducto, String numOrden) {
         try {
 
             //Obtener fecha actual
@@ -143,7 +144,6 @@ public class DBHandler {
 
             Statement statement = connection.createStatement();
 
-           
             System.out.println("INSERT INTO prestamo(Solicitante,NumOrden, Matricula, Fecha_Solicitud, Fecha_Entrega, Status, Cantidad,ID_Catalogo) VALUES ('" + nombre + "','" + numOrden + "','" + Matricula + "','" + fechaActual + "','0000-00-00 00:00:00' ,'Pedido', '" + Cantidad + "','" + idProducto + "' )");
             //Restar a la BD lo que se pidio
             String query1 = "UPDATE catalogo SET Cantidad = Cantidad - " + Cantidad + "   WHERE ID_Catalogo = '" + idProducto + "'";
@@ -263,5 +263,118 @@ public class DBHandler {
         }
         //return list;
     }
+
+    public static void retornarPedido(String orden) {
+        try {
+
+            //Obtener fecha actual
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date date = new Date();
+            String fechaActual = (String) dateFormat.format(date);
+            /////////////////////
+            Class.forName("com.mysql.jdbc.Driver");
+            String url = "jdbc:mysql://localhost:3306/catalogoquimica";
+            Connection connection = DriverManager.getConnection(url, "root", "");
+
+            Statement statement = connection.createStatement();
+
+            ResultSet results = statement.executeQuery("SELECT ID_Catalogo, Cantidad FROM prestamo WHERE NumOrden = '" + orden + "'");
+
+            while (results.next()) {
+                String idCatalogo = results.getString("ID_Catalogo");
+                String Cantidad = results.getString("Cantidad");
+
+                //Regresar lo prestado
+                String query = "UPDATE catalogo SET Cantidad = '" + Cantidad + "'WHERE  ID_Catalogo = '" + idCatalogo + "'";
+                //Insertar en pedidos
+                statement.executeUpdate(query);
+
+            }
+           
+            statement.close();
+            connection.close();
+
+        } catch (Exception ex) {
+            System.out.println("Error");
+
+            ex.printStackTrace();
+        }
+    }
+        //return list;
+     public static void entregarPedido(String orden) {
+        try {
+
+            //Obtener fecha actual
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date date = new Date();
+            String fechaActual = (String) dateFormat.format(date);
+            /////////////////////
+            Class.forName("com.mysql.jdbc.Driver");
+            String url = "jdbc:mysql://localhost:3306/catalogoquimica";
+            Connection connection = DriverManager.getConnection(url, "root", "");
+
+            Statement statement = connection.createStatement();
+             //Regresar lo prestado
+                String query = "UPDATE prestamo SET Status = 'Entregado', Fecha_Entrega ='"+ fechaActual +"' WHERE  NumOrden = '" + orden + "'";
+                //Insertar en pedidos
+                statement.executeUpdate(query);
+
+           
+            statement.close();
+            connection.close();
+
+        } catch (Exception ex) {
+            System.out.println("Error");
+
+            ex.printStackTrace();
+        }
+        //return list;
+    
+    
+    
+    }
+     
+     public static ArrayList misPedidos(String Matricula) {
+        ArrayList list = new ArrayList();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            String url = "jdbc:mysql://localhost:3306/catalogoquimica?zeroDateTimeBehavior=convertToNull&autoReconnect=true&characterEncoding=UTF-8&characterSetResults=UTF-8";
+            Connection connection = DriverManager.getConnection(url, "root", "");
+            Statement statement = connection.createStatement();
+           
+
+            ResultSet results = statement.executeQuery("SELECT   p.*,c.Descripcion FROM prestamo as p, catalogo as c WHERE p.ID_Catalogo = c.ID_Catalogo AND Matricula ='"+ Matricula+"'"
+                    + "GROUP BY NumOrden ORDER BY ID_Prestamo");
+
+            while (results.next()) {
+                String Id = Integer.toString(results.getInt("ID_Prestamo"));
+                String solicitante = results.getString("Solicitante");
+                String Fecha_Solicitud = results.getString("Fecha_Solicitud");
+                String Fecha_Entrega = results.getString("Fecha_Entrega");
+                String Status = results.getString("Status");
+                String Cantidad = Integer.toString(results.getInt("Cantidad"));
+                String ID_Catalogo = Integer.toString(results.getInt("ID_Catalogo"));
+                String NombreCatalogo = results.getString("Descripcion");
+                String NumOrden = results.getString("NumOrden");
+                
+                System.out.println(Status);
+
+                Prestamo prestamo = new Prestamo(Id, solicitante, Matricula, Fecha_Solicitud, Fecha_Entrega, Status,
+                        Cantidad, ID_Catalogo, NombreCatalogo, NumOrden);
+                list.add(prestamo);
+            }
+            statement.close();
+            connection.close();
+        } catch (Exception ex) {
+            //Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+        //return list;
+        return list;
+    }
+    
+    
+    
+    
 
 }

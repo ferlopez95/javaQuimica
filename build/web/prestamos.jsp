@@ -130,7 +130,7 @@
                                 Prestamo p = (Prestamo) prestamos.get(i);
                                 String status = p.getStatus().toString();
 
-
+                                if (!status.equals("Entregado")) {
                         %>
 
                         <div class="col-md-4">
@@ -156,6 +156,9 @@
                                 <li class="nav-item waves-effect waves-light">
                                     <a aria-expanded="false" class="nav-link"  href="Controlador?operacion=vermas&oden=<%= p.getNumOrden()%>" role="tab">Ver mas</a>
                                 </li> 
+                                <li class="nav-item waves-effect waves-light">
+                                    <a aria-expanded="false" class="nav-link"  href="Controlador?operacion=retornar&oden=<%= p.getNumOrden()%>" role="tab">Retornar</a>
+                                </li> 
                             </ul>
                             <% } else if (status.equals("Rechazado")) {%>
                             <ul class="nav nav-tabs tabs-3 red" role="tablist">
@@ -180,7 +183,7 @@
                                 <div class="tab-pane fade in active" >
                                     <br>
 
-                                    <p>El usuario a solicitado # productos el dia <%= p.getFecha_Solicitud()%>.</p>
+                                    <p>El usuario a solicitado <%= p.getMatricula()%> productos el dia <%= p.getFecha_Solicitud()%>.</p>
 
                                 </div>
                                 <!--/.Panel info-->
@@ -194,7 +197,8 @@
 
 
 
-                        <% }%>  
+                        <% }
+                            }%>  
                     </div>
 
                 </section>

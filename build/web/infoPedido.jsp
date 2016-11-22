@@ -143,7 +143,7 @@
                             <tbody>
                                 <%
                                     int total = 0;
-                                    String orden = "",status = "";
+                                    String orden = "", status = "";
                                     for (int i = 0; i < pedidos.size(); i++) {
                                         Prestamo p = (Prestamo) pedidos.get(i);
                                         total = total + Integer.parseInt(p.getCantidad());
@@ -168,11 +168,15 @@
                                     <td>
                                         <%= p.getFecha_Entrega()%>
                                     </td>
-                                    <% } else {%>
+                                    <% }  else if (status.equals("Rechazado")) {%>
                                     <td>
-                                        NoEntregado
+                                        N/A
                                     </td>
-                                    <%}%>
+                                    <%} else {%>
+                                    <td>
+                                        No Entregado
+                                    </td>
+                                     <%}%>
 
 
                                 </tr>
@@ -185,19 +189,26 @@
                                         <h4><strong><%= total%> productos</strong></h4></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="1"></td>
-                                    <% if( status.equals("Pedido") ) {%>
+                                    <% if (status.equals("Pedido")) {%>
                                     <td>
                                         <a href="Controlador?operacion=aceptar&oden=<%= orden%>" > <button class="btn btn-success  waves-effect waves-light"> Aceptar</button></a>
                                     </td>
                                     <td>
                                         <a href="Controlador?operacion=rechazar&oden=<%= orden%>" > <button class="btn btn-danger  waves-effect waves-light"> Rechazar</button></a>
                                     </td>
-                                    <% } else { %>
-                                     <td>
-                                        <a href="Controlador?operacion=allPedidos"> <button class="btn btn-primary waves-effect waves-light"> Regresar</button></a>
+                                    <td>
+                                       
                                     </td>
-                                    <%} %>
+                                    <td>
+                                        <a   onclick="goBack()"> <button class="btn btn-primary waves-effect waves-light"> Regresar</button></a>
+
+                                    </td>
+                                    <% } else { %>
+                                    <td>
+                                        <a href=" Controlador?operacion=retornar&oden=<%= orden%>" > <button class="btn btn-default  waves-effect waves-light"> Entregado</button></a>
+
+                                    </td>
+                                    <%}%>
 
                                 </tr>
                             </tbody>
@@ -257,6 +268,12 @@
         </footer>
         <!--/.Footer-->
         <!-- SCRIPTS -->
+        <script>
+            function goBack() {
+
+                window.history.back();
+            }
+        </script>  
         <script src="js/catalogo.js"></script>
         <!-- JQuery -->
         <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
@@ -270,8 +287,7 @@
             // SideNav init
             $(".button-collapse").sideNav();
             var el = document.querySelector('.custom-scrollbar');
-            Ps.initialize(el);
-        </script>
+            Ps.initialize(el);</script>
         <script>
             new WOW().init();
         </script>

@@ -72,7 +72,24 @@ public class Controlador extends HttpServlet {
 
             request.setAttribute("pedidos", lista);
             url = "/prestamos.jsp";
-        } else {
+        } else if (op.equals("retornar")) {
+            String orden = request.getParameter("oden");
+            DBHandler.retornarPedido(orden);
+            DBHandler.entregarPedido(orden);
+
+            url = "/Controlador?operacion=allPedidos";
+        } 
+        else if (op.equals("misPedidos")) {
+            String matricula = request.getParameter("matricula");
+
+            ArrayList lista = DBHandler.misPedidos(matricula);
+
+            request.setAttribute("pedidos", lista);
+            url = "/vermisPedidos.jsp";
+
+        }
+        
+         else {
             System.out.println("Error en la pagina");
 
         }
