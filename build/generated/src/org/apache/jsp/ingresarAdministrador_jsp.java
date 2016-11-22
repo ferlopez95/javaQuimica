@@ -48,6 +48,7 @@ public final class ingresarAdministrador_jsp extends org.apache.jasper.runtime.H
       out.write("<!DOCTYPE html>\r\n");
       out.write("<html>\r\n");
       out.write("    <head>\r\n");
+      out.write("        <link rel=\"icon\" type=\"image/png\" href=\"assets/logo.png\">\r\n");
       out.write("        <!-- Required meta tags always come first -->\r\n");
       out.write("        <meta charset=\"utf-8\">\r\n");
       out.write("        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\r\n");
@@ -72,8 +73,7 @@ public final class ingresarAdministrador_jsp extends org.apache.jasper.runtime.H
       out.write("                <!-- Logo -->\r\n");
       out.write("                <li>\r\n");
       out.write("                    <div class=\"logo-wrapper waves-light sn-avatar-wrapper\">\r\n");
-      out.write("                        <a href=\"#\">\r\n");
-      out.write("                            <img src=\"http://mdbootstrap.com/images/avatars/img%20(8)\" class=\"img-circle\">\r\n");
+      out.write("                         <a href=\"index.html\">\r\n");
       out.write("                        </a>\r\n");
       out.write("                    </div>\r\n");
       out.write("                </li>\r\n");
@@ -113,7 +113,7 @@ public final class ingresarAdministrador_jsp extends org.apache.jasper.runtime.H
       out.write("                                    class=\"fa fa-angle-down rotate-icon\"></i></a>\r\n");
       out.write("                            <div class=\"collapsible-body\">\r\n");
       out.write("                                <ul>\r\n");
-      out.write("                                    <li><a href=\"#\" class=\"waves-effect\">Login</a>\r\n");
+      out.write("                                     <li><a href=\"ingresarAdministrador.jsp\" class=\"waves-effect\">Login</a>\r\n");
       out.write("                                    </li>\r\n");
       out.write("                                    <li><a href=\"#\" class=\"waves-effect\">Pagina de admin</a>\r\n");
       out.write("                                    </li>\r\n");

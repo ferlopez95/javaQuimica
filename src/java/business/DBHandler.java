@@ -40,17 +40,20 @@ public class DBHandler {
     private static Connection connection;
 
     public DBHandler() {
-        try {
+        /*  try {
 
             connection = DriverManager.getConnection("jdbc:mysql://localhost/catalogoquimica", "root", "");
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public static Boolean getUser(User user) {
         try {
+            Class.forName("com.mysql.jdbc.Driver");
+            String url = "jdbc:mysql://localhost:3306/catalogoquimica";
+            Connection connection = DriverManager.getConnection(url, "root", "");
             Statement statement = connection.createStatement();
             ResultSet results = statement.executeQuery("SELECT Usuario, Password FROM usuario");
 
@@ -58,14 +61,16 @@ public class DBHandler {
                 String login = results.getString(1);
                 String password = results.getString(2);
                 if (user.getNombre().equals(login) && user.getPassword().equals(password)) {
+
                     usuarioValido = true;
                     accesoParaAdmin = true;
                     return true;
                 }
             }
             statement.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            //Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         usuarioValido = false;
         accesoParaAdmin = false;
@@ -399,6 +404,30 @@ public class DBHandler {
         }
         //return list;
         return list;
+    }
+
+    public static void updateCatalogo(String wordId, String numId, String valor) {
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            String url = "jdbc:mysql://localhost:3306/catalogoquimica?zeroDateTimeBehavior=convertToNull&autoReconnect=true&characterEncoding=UTF-8&characterSetResults=UTF-8";
+            Connection connection = DriverManager.getConnection(url, "root", "");
+            Statement statement = connection.createStatement();
+
+            //Restar a la BD lo que se pidio
+            String query = "UPDATE catalogo SET " + wordId + " = '" + valor + "' WHERE ID_Catalogo = '" + numId + "'";
+
+            System.out.println(query);
+            //Insertar en pedidos
+            statement.executeUpdate(query);
+
+            statement.close();
+            connection.close();
+
+        } catch (Exception ex) {
+            //Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
     }
 
 }

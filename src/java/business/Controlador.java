@@ -114,6 +114,17 @@ public class Controlador extends HttpServlet {
             url = "/vermisPedidos.jsp";
 
         } 
+        else if (op.equals("guardarCambios")) {
+            String wordId = request.getParameter("wordId");
+            String numId = request.getParameter("numId");
+            String valor = request.getParameter("valor");
+           
+            DBHandler.updateCatalogo(wordId, numId, valor);
+           
+            url = "/catalogoAdmin.jsp";
+        }
+       
+       
         else 
         {
             System.out.println("Error en la pagina");

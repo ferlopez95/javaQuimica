@@ -72,7 +72,7 @@
                                     class="fa fa-angle-down rotate-icon"></i></a>
                             <div class="collapsible-body">
                                 <ul>
-                                     <li><a href="ingresarAdministrador.jsp" class="waves-effect">Login</a>
+                                    <li><a href="ingresarAdministrador.jsp" class="waves-effect">Login</a>
                                     </li>
                                     <li><a href="#" class="waves-effect">Pagina de admin</a>
                                     </li>
@@ -120,9 +120,9 @@
                     </div>
                     <div style="text-align: center">
                         <div class="btn-group" data-toggle="buttons">
-                          <!--  <a href="Controlador?operacion=catalogoM"><button  type="button" class="active btn btn-primary btn-lg waves-effect waves-light"id="material">Material</button></a>
-                            <a href="Controlador?operacion=catalogoE"><button  type="button" class="btn btn-primary btn-lg waves-effect waves-light" id="elementos">Elementos</button></a>
-                           -->
+                            <!--  <a href="Controlador?operacion=catalogoM"><button  type="button" class="active btn btn-primary btn-lg waves-effect waves-light"id="material">Material</button></a>
+                              <a href="Controlador?operacion=catalogoE"><button  type="button" class="btn btn-primary btn-lg waves-effect waves-light" id="elementos">Elementos</button></a>
+                            -->
 
                         </div>
                     </div>
@@ -143,25 +143,26 @@
                             <!--Table body-->
                             <tbody>
                                 <% Boolean ceros = false;
+                                    int j = 1;
                                     for (int i = 0; i < catalogo.size(); i++) {
                                         Catalogo c = (Catalogo) catalogo.get(i);
                                 %>
                                 <tr id="<%= c.getID()%>">
                                     <td >
-                                        <h5 id="nombre-<%=i%>" ondblClick='modificar(this)'><strong>  <%= c.getNombre()%></strong></h5>
+                                        <h5 id="nombre-<%=j%>" ondblClick='modificar(this)'><strong>  <%= c.getNombre()%></strong></h5>
                                         <p class="text-muted"><%= c.getID()%></p>
                                     </td>
-                                    <td id="marca-<%=i%>" ondblClick='modificar(this)'>
+                                    <td id="marca-<%=j%>" ondblClick='modificar(this)'>
                                         <%= c.getMarca()%>
                                     </td>
-                                    <td id="capacidad-<%=i%>" ondblClick='modificar(this)'>
+                                    <td id="capacidad-<%=j%>" ondblClick='modificar(this)'>
                                         <%= c.getCapacidad()%>
                                     </td>
-                                    <td id="cantidad-<%=i%>" ondblClick='modificar(this)'id="cant<%= c.getID()%>">
+                                    <td id="cantidad-<%=j%>" ondblClick='modificar(this)'id="cant<%= c.getID()%>">
                                         <%= c.getCantidad()%>
                                     </td>
-                                    <% if (c.getCantidad() != "0"){ 
-                                    ceros = true; %>
+                                    <% if (c.getCantidad() != "0") {
+                                            ceros = true;%>
                                     <td>
                                         <span class="qty c<%= c.getID()%>" >0</span>
                                         <div class="btn-group" data-toggle="buttons">
@@ -175,7 +176,8 @@
                                     </td>
                                     <% }%>
                                 </tr>
-                                <% }%>  
+                                <% j = j + 1;
+                                    }%>  
                             </tbody>
                             <!--/Table body-->
                         </table>
@@ -290,10 +292,10 @@
         <!-- MDB core JavaScript -->
         <script type="text/javascript" src="js/mdb.min.js"></script>
         <script>
-            // SideNav init
-            $(".button-collapse").sideNav();
-            var el = document.querySelector('.custom-scrollbar');
-            Ps.initialize(el);
+                                        // SideNav init
+                                        $(".button-collapse").sideNav();
+                                        var el = document.querySelector('.custom-scrollbar');
+                                        Ps.initialize(el);
         </script>
         <script>
             new WOW().init();
