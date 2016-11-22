@@ -10,6 +10,8 @@
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
 <html lang="en">
     <head>
+        <link rel="icon" type="image/png" href="assets/logo.png">
+        <link rel="icon" type="image/png" href="assest/logo.png">
         <!-- Required meta tags always come first -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -36,7 +38,7 @@
                 <!-- Logo -->
                 <li>
                     <div class="logo-wrapper waves-light sn-avatar-wrapper">
-                         <a href="index.html">
+                        <a href="index.html">
                         </a>
                     </div>
                 </li>
@@ -76,7 +78,7 @@
                                     class="fa fa-angle-down rotate-icon"></i></a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="#" class="waves-effect">Login</a>
+                                     <li><a href="ingresarAdministrador.jsp" class="waves-effect">Login</a>
                                     </li>
                                     <li><a href="#" class="waves-effect">Pagina de admin</a>
                                     </li>
@@ -129,7 +131,7 @@
                                 Prestamo p = (Prestamo) prestamos.get(i);
                                 String status = p.getStatus().toString();
 
-                                if (!status.equals("Entregado")) {
+                                if (status.equals("Aceptado") || status.equals("Pedido")) {
                         %>
 
                         <div class="col-md-4">
@@ -182,7 +184,7 @@
                                 <div class="tab-pane fade in active" >
                                     <br>
 
-                                    <p>El usuario a solicitado <%= p.getMatricula()%> productos el dia <%= p.getFecha_Solicitud()%>.</p>
+                                    <p><%= p.getMatricula()%> realizo una solicitud el dia <%= p.getFecha_Solicitud()%>.</p>
 
                                 </div>
                                 <!--/.Panel info-->
@@ -254,6 +256,7 @@
         <!--/.Footer-->
         <!-- SCRIPTS -->
         <script src="js/catalogo.js"></script>
+        
         <!-- JQuery -->
         <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
         <!-- Tooltips -->

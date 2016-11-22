@@ -11,6 +11,7 @@
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
 <html lang="en">
     <head>
+        <link rel="icon" type="image/png" href="assets/logo.png">
         <!-- Required meta tags always come first -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -77,7 +78,7 @@
                                     class="fa fa-angle-down rotate-icon"></i></a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="#" class="waves-effect">Login</a>
+                                     <li><a href="ingresarAdministrador.jsp" class="waves-effect">Login</a>
                                     </li>
                                     <li><a href="#" class="waves-effect">Pagina de admin</a>
                                     </li>
@@ -121,7 +122,7 @@
                 <!--Section: Blog v.4-->
                 <section class="section section-blog-fw">
                     <div style="text-align: center">
-                        <%   Prestamo p1 = (Prestamo) pedidos.get(1);%>
+                        <%   Prestamo p1 = (Prestamo) pedidos.get(0);%>
                         <h5>Pedidos de <%= p1.getSolicitante()%> </h5>
                     </div>
 

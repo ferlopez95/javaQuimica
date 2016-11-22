@@ -1,3 +1,10 @@
+<%-- 
+    Document   : infoPedido
+    Created on : Nov 21, 2016, 3:58:17 AM
+    Author     : Edgardo Acosta
+--%>
+
+<%@page import="business.Prestamo"%>
 <!DOCTYPE html>
 <%@page import="java.util.ArrayList"%>
 <%@page import="business.DBHandler"%>
@@ -23,7 +30,7 @@
     </head>
     <body class="fixed-sn mdb-skin">
         <%@page import="business.Catalogo" %>
-        <% ArrayList catalogo = (ArrayList) request.getAttribute("catalogo");%>
+        <% ArrayList pedidos = (ArrayList) request.getAttribute("pedidos");%>
         <!--Double navigation-->
         <header>
             <!-- Sidebar navigation -->
@@ -31,7 +38,7 @@
                 <!-- Logo -->
                 <li>
                     <div class="logo-wrapper waves-light sn-avatar-wrapper">
-                        <a href="index.html">
+                         <a href="index.html">
                         </a>
                     </div>
                 </li>
@@ -62,16 +69,16 @@
                 <!-- Side navigation links -->
                 <li>
                     <ul class="collapsible collapsible-accordion">
-                        <li><a class="collapsible-header waves-effect arrow-r" href="index.html"><i class="fa fa-home"></i>Inicio</a>
+                        <li><a class="collapsible-header waves-effect arrow-r" href="index.html"><i class="fa fa-bus"></i>Inicio</a>
                         </li>
-                        <li><a class="collapsible-header waves-effect arrow-r" href="Controlador?operacion=allPedidos"><i class="fa fa-exchange"></i>Prestamos</a>
+                        <li><a class="collapsible-header waves-effect arrow-r" href="prestamos.php"><i class="fa fa-camera"></i>Prestamos</a>
                         </li>
                         <li>
-                            <a class="collapsible-header waves-effect arrow-r"><i  class="fa fa-user"></i> Administrador<i
+                            <a class="collapsible-header waves-effect arrow-r"><i class="fa fa-user"></i> Administrador<i
                                     class="fa fa-angle-down rotate-icon"></i></a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="ingresarAdministrador.jsp" class="waves-effect">Login</a>
+                                     <li><a href="ingresarAdministrador.jsp" class="waves-effect">Login</a>
                                     </li>
                                     <li><a href="#" class="waves-effect">Pagina de admin</a>
                                     </li>
@@ -79,7 +86,7 @@
                             </div>
                         </li>
                         <li>
-                            <a class="collapsible-header waves-effect arrow-r"><i class="fa fa-users"></i>Contactanos<i
+                            <a class="collapsible-header waves-effect arrow-r"><i class="fa fa-envelope"></i>Contactanos<i
                                     class="fa fa-angle-down rotate-icon"></i></a>
                             <div class="collapsible-body">
                                 <ul>
@@ -115,64 +122,63 @@
                 <!--Section: Blog v.4-->
                 <section class="section section-blog-fw">
                     <div style="text-align: center">
-                        <h5>Catalogo de contenido</h5>
+                        <%   Prestamo p1 = (Prestamo) pedidos.get(0);%>
+                        <h5>Pedidos de <%= p1.getSolicitante()%> </h5>
                     </div>
-                    <div style="text-align: center">
-                        <div class="btn-group" data-toggle="buttons">
-                          <!--  <a href="Controlador?operacion=catalogoM"><button  type="button" class="active btn btn-primary btn-lg waves-effect waves-light"id="material">Material</button></a>
-                            <a href="Controlador?operacion=catalogoE"><button  type="button" class="btn btn-primary btn-lg waves-effect waves-light" id="elementos">Elementos</button></a>
-                           -->
 
-                        </div>
-                    </div>
                     <br>
                     <div class="table-responsive" id="materialesA">
                         <table class="table product-table">
                             <!--Table head-->
                             <thead>
                                 <tr>
-                                    <th>Decripcion</th>
-                                    <th>Marca</th>
-                                    <th>Capacidad</th>
+                                    <th>Nombre Producto</th>
                                     <th>Cantidad</th>
-                                    <th>Agregar</th>
+                                    <th>Fecha de Solicitud</th>
+                                    <th>Fecha de Entrega</th>
                                 </tr>
                             </thead>
                             <!--/Table head-->
                             <!--Table body-->
                             <tbody>
-                                <% Boolean ceros = false;
-                                    for (int i = 0; i < catalogo.size(); i++) {
-                                        Catalogo c = (Catalogo) catalogo.get(i);
+                                <%
+                                    int total = 0;
+                                    String orden = "", status = "";
+                                    for (int i = 0; i < pedidos.size(); i++) {
+                                        Prestamo p = (Prestamo) pedidos.get(i);
+                                        total = total + Integer.parseInt(p.getCantidad());
+                                        orden = p.getNumOrden();
+                                        status = p.getStatus();
                                 %>
-                                <tr id="<%= c.getID()%>">
+                                <tr id="<%=p.getId_Prestamo()%>">
                                     <td>
-                                        <h5><strong>  <%= c.getNombre()%></strong></h5>
-                                        <p class="text-muted"><%= c.getID()%></p>
+                                        <h5><strong>  <%= p.getNombreCatalogo()%> </strong></h5>
+
                                     </td>
                                     <td>
-                                        <%= c.getMarca()%>
+                                        <%= p.getCantidad()%>
                                     </td>
-                                    <td >
-                                        <%= c.getCapacidad()%>
-                                    </td>
-                                    <td id="cant<%= c.getID()%>">
-                                        <%= c.getCantidad()%>
-                                    </td>
-                                    <% if (c.getCantidad() != "0"){ 
-                                    ceros = true; %>
                                     <td>
-                                        <span class="qty c<%= c.getID()%>" >0</span>
-                                        <div class="btn-group" data-toggle="buttons">
-                                            <label class="btn btn-sm btn-primary btn-rounded waves-effect waves-light minus">
-                                                <input type="radio" name="options" id="option1">—
-                                            </label>
-                                            <label class="btn btn-sm btn-primary btn-rounded waves-effect waves-light plus">
-                                                <input type="radio" name="options" id="option2">+
-                                            </label>
-                                        </div>
+                                        <%= p.getFecha_Solicitud()%>
                                     </td>
-                                    <% }%>
+
+
+                                    <% if ((p.getFecha_Entrega() != "0000-00-00 00:00:00") && (p.getFecha_Entrega() != null)) {
+                                    %>
+                                    <td>
+                                        <%= p.getFecha_Entrega()%>
+                                    </td>
+                                    <% } else if (status.equals("Rechazado")) {%>
+                                    <td>
+                                        N/A
+                                    </td>
+                                    <%} else {%>
+                                    <td>
+                                        No Entregado
+                                    </td>
+                                    <%}%>
+
+
                                 </tr>
                                 <% }%>  
                                 <tr>
@@ -180,119 +186,22 @@
                                     <td>
                                         <h4><strong>Total</strong></h4></td>
                                     <td>
-                                        <h4><strong><span id="sumaT">0</span> productos</strong></h4></td>
-                                    <% if(ceros){ %>
-                                    <td colspan="3">
-                                        <button type="button" class="btn btn-primary waves-effect waves-light ordenar" >Separar <i
-                                                class="fa fa-angle-right right"></i></button>
+                                        <h4><strong><%= total%> productos</strong></h4></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a   onclick="goBack()"> <button class="btn btn-primary waves-effect waves-light"> Regresar</button></a>
                                     </td>
-                                    <% } %>
-                                    
+
                                 </tr>
                             </tbody>
                             <!--/Table body-->
                         </table>
-                        <% if (DBHandler.accesoParaAdmin == true) { %>
-                        <h4 class="card-title"><strong><a href="Controlador?operacion=catalogoMAdmin" onclick="catalogo()">Editar Catalogo</a></strong></h4>
-                        <% }%>
-                    </div>
-                    <div class="table-responsive" id="elementosM" style="display: none">
-                        <table class="table product-table">
-                            <!--Table head-->
-                            <thead>
-                                <tr>
-                                    <th>Decripcion</th>
-                                    <th>Marca</th>
-                                    <th>Capacidad</th>
-                                    <th>Cantidad</th>
-                                    <th>Agregar</th>
-                                </tr>
-                            </thead>
-                            <!--/Table head-->
-                            <!--Table body-->
-                            <tbody>
-                                <% for (int i = 0; i < catalogo.size(); i++) {
-                                        Catalogo c = (Catalogo) catalogo.get(i);
-                                %>
-                                <tr id="<%= c.getID()%>">
-                                    <td>
-                                        <h5><strong>  <%= c.getNombre()%></strong></h5>
-                                        <p class="text-muted"><%= c.getID()%></p>
-                                    </td>
-                                    <td>
-                                        <%= c.getMarca()%>
-                                    </td>
-                                    <td>
-                                        <%= c.getCapacidad()%>
-                                    </td>
-                                    <td class="cantidad">
-                                        <%= c.getCantidad()%>
-                                    </td>
-                                    <td>
-                                        <span class="qty" >0 </span>
-                                        <div class="btn-group" data-toggle="buttons">
-                                            <label class="btn btn-sm btn-primary btn-rounded waves-effect waves-light minus">
-                                                <input type="radio" name="options" id="option1">—
-                                            </label>
-                                            <label class="btn btn-sm btn-primary btn-rounded waves-effect waves-light plus">
-                                                <input type="radio" name="options" id="option2">+
-                                            </label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <% }%>  
-                                <tr>
-                                    <td colspan="1"></td>
-                                    <td>
-                                        <h4><strong>Total</strong></h4></td>
-                                    <td>
-                                        <h4><strong>5 productos</strong></h4></td>
-                                    <td colspan="3">
-                                        <button type="button" class="btn btn-primary waves-effect waves-light ordenar" >Separar <i
-                                                class="fa fa-angle-right right"></i></button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <!--/Table body-->
-                        </table>
-                        <% if (DBHandler.accesoParaAdmin == true) { %>
-                        <form action="catalogoAdmin.jsp">
-                            <input type="submit" class="btn btn-primary waves-effect waves-light ordenar" value="Editar Cat&aacute;logo"> 
-                        </form>
-                        <% }%>
                     </div>
                 </section>
                 <!--/Section: Blog v.4-->
                 <hr class="between-sections">
-                <div id="datos" style="display:none">
-                    <div class="col-md-6">
-                        <div class="md-form">
-                            <i class="fa fa-envelope prefix"></i>
-                            <input type="email" id="email" class="form-control validate" required>
-                            <label for="form9" data-error="No es correo" 
-                                   data-success="right" class="">Escribe tu correo</label>
-                        </div>
 
-                        <div class="md-form">
-                            <i class="fa fa-user prefix"></i>
-                            <input type="text" id="matricula" class="form-control" required>
-                            <label for="form9" class="">Escribe tu matricula</label>
-                        </div>
-
-                        <div class="md-form">
-                            <i class="fa fa-pencil prefix"></i>
-                            <input type="text" id="nombre" class="form-control" required>
-                            <label for="form9">Nombre</label>
-                        </div>
-                        <div class="text-xs-center">
-                            <button class="btn btn-primary waves-effect waves-light" id="btSend"
-                                   > 
-                                Enviar
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
 
             </div>
         </main>
@@ -342,6 +251,12 @@
         </footer>
         <!--/.Footer-->
         <!-- SCRIPTS -->
+        <script>
+            function goBack() {
+
+                window.history.back();
+            }
+        </script>  
         <script src="js/catalogo.js"></script>
         <!-- JQuery -->
         <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
@@ -355,8 +270,7 @@
             // SideNav init
             $(".button-collapse").sideNav();
             var el = document.querySelector('.custom-scrollbar');
-            Ps.initialize(el);
-        </script>
+            Ps.initialize(el);</script>
         <script>
             new WOW().init();
         </script>

@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="icon" type="image/png" href="assets/logo.png">
         <!-- Required meta tags always come first -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -72,7 +73,7 @@
                                     class="fa fa-angle-down rotate-icon"></i></a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="#" class="waves-effect">Login</a>
+                                     <li><a href="ingresarAdministrador.jsp" class="waves-effect">Login</a>
                                     </li>
                                     <li><a href="#" class="waves-effect">Pagina de admin</a>
                                     </li>

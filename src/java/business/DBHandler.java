@@ -280,6 +280,7 @@ public class DBHandler {
             Connection connection = DriverManager.getConnection(url, "root", "");
 
             Statement statement = connection.createStatement();
+            Statement statement2 = connection.createStatement();
 
             ResultSet results = statement.executeQuery("SELECT ID_Catalogo, Cantidad FROM prestamo WHERE NumOrden = '" + orden + "'");
 
@@ -288,12 +289,10 @@ public class DBHandler {
                 String Cantidad = results.getString("Cantidad");
 
                 //Regresar lo prestado
-                String query = "UPDATE catalogo SET Cantidad = '" + Cantidad + "'WHERE  ID_Catalogo = '" + idCatalogo + "'";
-                //Insertar en pedidos
-                statement.executeUpdate(query);
+                retornarPedido2(idCatalogo, Cantidad);
 
             }
-           
+
             statement.close();
             connection.close();
 
@@ -303,8 +302,8 @@ public class DBHandler {
             ex.printStackTrace();
         }
     }
-        //return list;
-     public static void entregarPedido(String orden) {
+
+    public static void retornarPedido2(String idCatalogo, String Cantidad) {
         try {
 
             //Obtener fecha actual
@@ -317,12 +316,41 @@ public class DBHandler {
             Connection connection = DriverManager.getConnection(url, "root", "");
 
             Statement statement = connection.createStatement();
-             //Regresar lo prestado
-                String query = "UPDATE prestamo SET Status = 'Entregado', Fecha_Entrega ='"+ fechaActual +"' WHERE  NumOrden = '" + orden + "'";
-                //Insertar en pedidos
-                statement.executeUpdate(query);
 
-           
+            //Regresar lo prestado
+            String query = "UPDATE catalogo SET Cantidad = Cantidad + '" + Cantidad + "'WHERE  ID_Catalogo = '" + idCatalogo + "'";
+            //Insertar en pedidos
+            statement.executeUpdate(query);
+
+            statement.close();
+            connection.close();
+
+        } catch (Exception ex) {
+            System.out.println("Error");
+
+            ex.printStackTrace();
+        }
+    }
+
+    //return list;
+    public static void entregarPedido(String orden) {
+        try {
+
+            //Obtener fecha actual
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date date = new Date();
+            String fechaActual = (String) dateFormat.format(date);
+            /////////////////////
+            Class.forName("com.mysql.jdbc.Driver");
+            String url = "jdbc:mysql://localhost:3306/catalogoquimica";
+            Connection connection = DriverManager.getConnection(url, "root", "");
+
+            Statement statement = connection.createStatement();
+            //Regresar lo prestado
+            String query = "UPDATE prestamo SET Status = 'Entregado', Fecha_Entrega ='" + fechaActual + "' WHERE  NumOrden = '" + orden + "'";
+            //Insertar en pedidos
+            statement.executeUpdate(query);
+
             statement.close();
             connection.close();
 
@@ -332,21 +360,18 @@ public class DBHandler {
             ex.printStackTrace();
         }
         //return list;
-    
-    
-    
+
     }
-     
-     public static ArrayList misPedidos(String Matricula) {
+
+    public static ArrayList misPedidos(String Matricula) {
         ArrayList list = new ArrayList();
         try {
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://localhost:3306/catalogoquimica?zeroDateTimeBehavior=convertToNull&autoReconnect=true&characterEncoding=UTF-8&characterSetResults=UTF-8";
             Connection connection = DriverManager.getConnection(url, "root", "");
             Statement statement = connection.createStatement();
-           
 
-            ResultSet results = statement.executeQuery("SELECT   p.*,c.Descripcion FROM prestamo as p, catalogo as c WHERE p.ID_Catalogo = c.ID_Catalogo AND Matricula ='"+ Matricula+"'"
+            ResultSet results = statement.executeQuery("SELECT   p.*,c.Descripcion FROM prestamo as p, catalogo as c WHERE p.ID_Catalogo = c.ID_Catalogo AND Matricula ='" + Matricula + "'"
                     + "GROUP BY NumOrden ORDER BY ID_Prestamo");
 
             while (results.next()) {
@@ -359,7 +384,7 @@ public class DBHandler {
                 String ID_Catalogo = Integer.toString(results.getInt("ID_Catalogo"));
                 String NombreCatalogo = results.getString("Descripcion");
                 String NumOrden = results.getString("NumOrden");
-                
+
                 System.out.println(Status);
 
                 Prestamo prestamo = new Prestamo(Id, solicitante, Matricula, Fecha_Solicitud, Fecha_Entrega, Status,
@@ -375,9 +400,5 @@ public class DBHandler {
         //return list;
         return list;
     }
-    
-    
-    
-    
 
 }

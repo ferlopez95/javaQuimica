@@ -73,7 +73,17 @@ public class Controlador extends HttpServlet {
             request.setAttribute("pedidos", lista);
             url = "/infoPedido.jsp";
 
-        } else if (op.equals("aceptar")) {
+        }
+        else if (op.equals("vermas2")) {
+            String orden = request.getParameter("oden");
+
+            ArrayList lista = DBHandler.getPedidos(orden);
+
+            request.setAttribute("pedidos", lista);
+            url = "/infoPedido2.jsp";
+
+        }
+        else if (op.equals("aceptar")) {
             String orden = request.getParameter("oden");
             DBHandler.updateStatusPedido(orden, "Aceptado");
             url = "/Controlador?operacion=allPedidos";
@@ -81,6 +91,7 @@ public class Controlador extends HttpServlet {
 
             String orden = request.getParameter("oden");
             DBHandler.updateStatusPedido(orden, "Rechazado");
+            DBHandler.retornarPedido(orden);
             url = "/Controlador?operacion=allPedidos";
         } else if (op.equals("allPedidos")) {
             ArrayList lista = DBHandler.getAllPedidos();

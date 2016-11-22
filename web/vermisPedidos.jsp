@@ -11,6 +11,7 @@
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
 <html lang="en">
     <head>
+        <link rel="icon" type="image/png" href="assets/logo.png">
         <!-- Required meta tags always come first -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -37,8 +38,7 @@
                 <!-- Logo -->
                 <li>
                     <div class="logo-wrapper waves-light sn-avatar-wrapper">
-                        <a href="#">
-                            <img src="http://mdbootstrap.com/images/avatars/img%20(8)" class="img-circle">
+                        <a href="index.html">
                         </a>
                     </div>
                 </li>
@@ -80,7 +80,7 @@
                                     class="fa fa-angle-down rotate-icon"></i></a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="#" class="waves-effect">Login</a>
+                                     <li><a href="ingresarAdministrador.jsp" class="waves-effect">Login</a>
                                     </li>
                                     <li><a href="#" class="waves-effect">Pagina de admin</a>
                                     </li>
@@ -143,7 +143,7 @@
                             <% if (status.equals("Pedido")) {%>
                             <ul class="nav nav-tabs tabs-3 orange" role="tablist">
                                 <li class="nav-item waves-effect waves-light">
-                                    <a aria-expanded="false" class="nav-link" href="Controlador?operacion=vermas&oden=<%= p.getNumOrden()%>" role="tab">Ver mas</a>
+                                    <a aria-expanded="false" class="nav-link" href="Controlador?operacion=vermas2&oden=<%= p.getNumOrden()%>" role="tab">Ver mas</a>
                                 </li> 
                             </ul>
                             <% } else if (status.equals("Aceptado")) {
@@ -151,21 +151,21 @@
 
                             <ul class="nav nav-tabs tabs-3 green" role="tablist">
                                 <li class="nav-item waves-effect waves-light">
-                                    <a aria-expanded="false" class="nav-link"  href="Controlador?operacion=vermas&oden=<%= p.getNumOrden()%>" role="tab">Ver mas</a>
+                                    <a aria-expanded="false" class="nav-link"  href="Controlador?operacion=vermas2&oden=<%= p.getNumOrden()%>" role="tab">Ver mas</a>
                                 </li> 
 
                             </ul>
                             <% } else if (status.equals("Rechazado")) {%>
                             <ul class="nav nav-tabs tabs-3 red" role="tablist">
                                 <li class="nav-item waves-effect waves-light">
-                                    <a aria-expanded="false" class="nav-link" href="Controlador?operacion=vermas&oden=<%= p.getNumOrden()%>" role="tab">Ver mas</a>
+                                    <a aria-expanded="false" class="nav-link" href="Controlador?operacion=vermas2&oden=<%= p.getNumOrden()%>" role="tab">Ver mas</a>
                                 </li> 
                             </ul>
 
                             <% } else if (status.equals("Entregado")) {%>
                             <ul class="nav nav-tabs tabs-3 blue" role="tablist">
                                 <li class="nav-item waves-effect waves-light">
-                                    <a aria-expanded="false" class="nav-link"  href="Controlador?operacion=vermas&oden=<%= p.getNumOrden()%>" role="tab">Ver mas</a>
+                                    <a aria-expanded="false" class="nav-link"  href="Controlador?operacion=verma2s&oden=<%= p.getNumOrden()%>" role="tab">Ver mas</a>
                                 </li> 
                             </ul>
 
@@ -179,9 +179,9 @@
                                     <br>
                                     <%  if (status.equals("Entregado")) {%>
 
-                                    <p>El usuario a solicitado <%= p.getMatricula()%> productos solicitado el dia <%= p.getFecha_Solicitud()%>.</p>
+                                    <p> <%= p.getMatricula()%> realizo una solicitud el dia <%= p.getFecha_Solicitud()%>.</p>
                                     <% } else {%>
-                                    <p>El usuario a solicitado <%= p.getMatricula()%> productos entregado el dia <%= p.getFecha_Entrega()%>.</p>
+                                    <p><%= p.getMatricula()%> retorno su prestamo el dia <%= p.getFecha_Entrega()%>.</p>
                                     <% }%>
 
                                 </div>
