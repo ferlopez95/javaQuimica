@@ -187,10 +187,14 @@
                                                 class="fa fa-angle-right right"></i></button>
                                     </td>
                                     <% } %>
+                                    
                                 </tr>
                             </tbody>
                             <!--/Table body-->
                         </table>
+                        <% if (DBHandler.accesoParaAdmin == true) { %>
+                        <h4 class="card-title"><strong><a href="Controlador?operacion=catalogoMAdmin" onclick="catalogo()">Editar Catalogo</a></strong></h4>
+                        <% }%>
                     </div>
                     <div class="table-responsive" id="elementosM" style="display: none">
                         <table class="table product-table">
@@ -251,6 +255,11 @@
                             </tbody>
                             <!--/Table body-->
                         </table>
+                        <% if (DBHandler.accesoParaAdmin == true) { %>
+                        <form action="catalogoAdmin.jsp">
+                            <input type="submit" class="btn btn-primary waves-effect waves-light ordenar" value="Editar Cat&aacute;logo"> 
+                        </form>
+                        <% }%>
                     </div>
                 </section>
                 <!--/Section: Blog v.4-->

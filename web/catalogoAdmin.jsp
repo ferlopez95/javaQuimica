@@ -19,6 +19,7 @@
         <script src="sweetalert2/sweetalert2.min.js"></script>
         <link rel="stylesheet" href="sweetalert2/sweetalert2.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="modificacion.js"></script>
     </head>
     <body class="fixed-sn mdb-skin">
         <%@page import="business.Catalogo" %>
@@ -115,7 +116,7 @@
                 <!--Section: Blog v.4-->
                 <section class="section section-blog-fw">
                     <div style="text-align: center">
-                        <h5>Catalogo de contenido</h5>
+                        <h5>Editar contenido de cat&aacute;logo</h5>
                     </div>
                     <div style="text-align: center">
                         <div class="btn-group" data-toggle="buttons">
@@ -146,17 +147,17 @@
                                         Catalogo c = (Catalogo) catalogo.get(i);
                                 %>
                                 <tr id="<%= c.getID()%>">
-                                    <td>
-                                        <h5><strong>  <%= c.getNombre()%></strong></h5>
+                                    <td >
+                                        <h5 id="nombre-<%=i%>" ondblClick='modificar(this)'><strong>  <%= c.getNombre()%></strong></h5>
                                         <p class="text-muted"><%= c.getID()%></p>
                                     </td>
-                                    <td>
+                                    <td id="marca-<%=i%>" ondblClick='modificar(this)'>
                                         <%= c.getMarca()%>
                                     </td>
-                                    <td >
+                                    <td id="capacidad-<%=i%>" ondblClick='modificar(this)'>
                                         <%= c.getCapacidad()%>
                                     </td>
-                                    <td id="cant<%= c.getID()%>">
+                                    <td id="cantidad-<%=i%>" ondblClick='modificar(this)'id="cant<%= c.getID()%>">
                                         <%= c.getCantidad()%>
                                     </td>
                                     <% if (c.getCantidad() != "0"){ 
@@ -175,26 +176,9 @@
                                     <% }%>
                                 </tr>
                                 <% }%>  
-                                <tr>
-                                    <td colspan="1"></td>
-                                    <td>
-                                        <h4><strong>Total</strong></h4></td>
-                                    <td>
-                                        <h4><strong><span id="sumaT">0</span> productos</strong></h4></td>
-                                    <% if(ceros){ %>
-                                    <td colspan="3">
-                                        <button type="button" class="btn btn-primary waves-effect waves-light ordenar" >Separar <i
-                                                class="fa fa-angle-right right"></i></button>
-                                    </td>
-                                    <% } %>
-                                    
-                                </tr>
                             </tbody>
                             <!--/Table body-->
                         </table>
-                        <% if (DBHandler.accesoParaAdmin == true) { %>
-                        <h4 class="card-title"><strong><a href="Controlador?operacion=catalogoMAdmin" onclick="catalogo()">Editar Catalogo</a></strong></h4>
-                        <% }%>
                     </div>
                     <div class="table-responsive" id="elementosM" style="display: none">
                         <table class="table product-table">
@@ -215,17 +199,17 @@
                                         Catalogo c = (Catalogo) catalogo.get(i);
                                 %>
                                 <tr id="<%= c.getID()%>">
-                                    <td>
-                                        <h5><strong>  <%= c.getNombre()%></strong></h5>
+                                    <td >
+                                        <h5 id="nombre-<%=i%>" ondblClick='modificar(this)'><strong>  <%= c.getNombre()%></strong></h5>
                                         <p class="text-muted"><%= c.getID()%></p>
                                     </td>
-                                    <td>
+                                    <td id="marca-<%=i%>" ondblClick='modificar(this)'>
                                         <%= c.getMarca()%>
                                     </td>
-                                    <td>
+                                    <td id="capacidad-<%=i%>" ondblClick='modificar(this)'>
                                         <%= c.getCapacidad()%>
                                     </td>
-                                    <td class="cantidad">
+                                    <td id="cantidad-<%=i%>" ondblClick='modificar(this)'id="cant<%= c.getID()%>">
                                         <%= c.getCantidad()%>
                                     </td>
                                     <td>
@@ -241,58 +225,12 @@
                                     </td>
                                 </tr>
                                 <% }%>  
-                                <tr>
-                                    <td colspan="1"></td>
-                                    <td>
-                                        <h4><strong>Total</strong></h4></td>
-                                    <td>
-                                        <h4><strong>5 productos</strong></h4></td>
-                                    <td colspan="3">
-                                        <button type="button" class="btn btn-primary waves-effect waves-light ordenar" >Separar <i
-                                                class="fa fa-angle-right right"></i></button>
-                                    </td>
-                                </tr>
                             </tbody>
                             <!--/Table body-->
                         </table>
-                        <% if (DBHandler.accesoParaAdmin == true) { %>
-                        <form action="catalogoAdmin.jsp">
-                            <input type="submit" class="btn btn-primary waves-effect waves-light ordenar" value="Editar Cat&aacute;logo"> 
-                        </form>
-                        <% }%>
                     </div>
                 </section>
                 <!--/Section: Blog v.4-->
-                <hr class="between-sections">
-                <div id="datos" style="display:none">
-                    <div class="col-md-6">
-                        <div class="md-form">
-                            <i class="fa fa-envelope prefix"></i>
-                            <input type="email" id="email" class="form-control validate" required>
-                            <label for="form9" data-error="No es correo" 
-                                   data-success="right" class="">Escribe tu correo</label>
-                        </div>
-
-                        <div class="md-form">
-                            <i class="fa fa-user prefix"></i>
-                            <input type="text" id="matricula" class="form-control" required>
-                            <label for="form9" class="">Escribe tu matricula</label>
-                        </div>
-
-                        <div class="md-form">
-                            <i class="fa fa-pencil prefix"></i>
-                            <input type="text" id="nombre" class="form-control" required>
-                            <label for="form9">Nombre</label>
-                        </div>
-                        <div class="text-xs-center">
-                            <button class="btn btn-primary waves-effect waves-light" id="btSend"
-                                   > 
-                                Enviar
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
 
             </div>
         </main>
