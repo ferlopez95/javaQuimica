@@ -30,8 +30,8 @@
                 <!-- Logo -->
                 <li>
                     <div class="logo-wrapper waves-light sn-avatar-wrapper">
-                        <a href="#">
-                            <img src="http://mdbootstrap.com/images/avatars/img%20(8)" class="img-circle">
+                        <a href="index.html">
+                            <img src="http://prepamet.tol.itesm.mx/Logotipo_Vertical_Azul.png" class="img-circle">
                         </a>
                     </div>
                 </li>
